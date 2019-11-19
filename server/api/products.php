@@ -29,10 +29,11 @@ function one_product_detail($link, $itemId){
     $link -> query($sqlId);
     $idResult = mysqli_query($link, $sqlId);
     $productOutcome = mysqli_fetch_assoc($idResult);
-  } else if($_GET['productId'] <= 0){
+  } else if($_GET['productId'] <= 0 || !is_numeric($_GET['productId'])){
     throw new ApiError("Product ID $itemId is not a valid ID", 400);
-  } else if($_GET['productId'] === 0 || $_GET['productId'] >= 7){
-    throw new ApiError("Product with ID $itemId does not exist", 404);
+  }
+  if (!$productOutcome) {
+    throw new ApiError("Product ID $itemId does not exist", 404);
   }
   return $productOutcome;
 }
