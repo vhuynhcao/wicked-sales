@@ -9,7 +9,7 @@ class ProductListItem extends React.Component {
   render() {
     return (
       <div className="card">
-        <img className="card-im-top" src={this.props.image}/>
+        <img className="card-img-top" src={this.props.image}/>
         <div className="card-body">
           <h2 className="card-title">{this.props.name}</h2>
           <h4 className="card-subtitle mb-2 text-muted">{this.props.price}</h4>

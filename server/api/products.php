@@ -3,9 +3,7 @@
 if($request['method']==='GET'){
   $link = get_db_link();
   $products = get_products($link);
-  $response['body'] = [
-    'products' => $products
-  ];
+  $response['body'] = $products;
   send($response);
 }
 
