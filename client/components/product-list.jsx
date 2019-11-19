@@ -32,7 +32,7 @@ class ProductList extends React.Component {
     });
 
     return (
-      <div className="col-md-4">
+      <div className="row">
         {productTable}
       </div>
     );
