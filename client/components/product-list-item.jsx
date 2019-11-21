@@ -7,7 +7,7 @@ function ProductListItem(props) {
   };
   return (
     <div className="col-12 col-md-4 d-flex align-items-stretch my-3">
-      <div className="card">
+      <div className="card hoverCard" onClick={() => props.setView('details', { product: props.id })}>
         <img className="card-img-top" style={imgSize} src={props.image}/>
         <div className="card-body d-flex flex-column justify-content-around">
           <h2 className="card-title">{props.name}</h2>

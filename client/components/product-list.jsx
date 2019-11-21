@@ -24,19 +24,10 @@ class ProductList extends React.Component {
       .catch(error => console.error('Fetch error: ', error));
   }
 
-  displayOneProduct(product) {
-    this.props.setView = {
-      name: 'display',
-      params: {
-        productId: product.productId
-      }
-    };
-  }
-
   render() {
     var productTable = this.state.products.map(item => {
       return (
-        <ProductListItem displayOneProduct={() => this.displayOneProduct} key={item.productId} id={item.productId} item={item} image={item.image} name={item.name} price={item.price} info={item.shortDescription}/>
+        <ProductListItem setView={this.props.setView} key={item.productId} id={item.productId} item={item} image={item.image} name={item.name} price={item.price} info={item.shortDescription}/>
       );
     });
 
