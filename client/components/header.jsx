@@ -6,6 +6,10 @@ function Header(props) {
       <div className="nav-brand">
         <i className="fas fa-dollar-sign mr-1"/>
         {props.text}
+        <div>
+          {props.cartItemCount}
+          <i className="fas fa-shopping-cart"/>
+        </div>
       </div>
     </nav>
   );
