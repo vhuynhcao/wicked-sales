@@ -27,7 +27,7 @@ class ProductList extends React.Component {
   render() {
     var productTable = this.state.products.map(item => {
       return (
-        <ProductListItem key={item.productId} id={item.productId} item={item} image={item.image} name={item.name} price={item.price} info={item.shortDescription}/>
+        <ProductListItem setView={this.props.setView} key={item.productId} id={item.productId} item={item} image={item.image} name={item.name} price={item.price} info={item.shortDescription}/>
       );
     });
 
