@@ -37,6 +37,7 @@ class ProductDetails extends React.Component {
                 <h3 className="card-title">{singleProduct.name}</h3>
                 <h4 className="text-muted card-text">{'$' + (singleProduct.price / 100).toFixed(2)}</h4>
                 <p className="card-text">{singleProduct.shortDescription}</p>
+                <button onClick={this.props.addToCart}>Add to Cart</button>
               </div>
             </div>
           </div>

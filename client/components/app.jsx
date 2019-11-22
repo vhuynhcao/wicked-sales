@@ -15,6 +15,7 @@ export default class App extends React.Component {
     };
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +27,16 @@ export default class App extends React.Component {
       .then(response => response.json())
       .then(cartItem => this.setState({ cart: cartItem }))
       .catch(error => console.error('Fetch fail: ', error));
+  }
+
+  addToCart(product) {
+    const request = {
+      method: 'POST'
+    };
+    fetch('/api/cart', request)
+      .then(response => response.json())
+      .then(product => this.setState({ cart: product }))
+      .catch(error => console.error('Add error: ', error));
   }
 
   setView(name, params) {
@@ -41,7 +52,7 @@ export default class App extends React.Component {
     if (stateName === 'catalog') {
       singleProductElement = <ProductList setView={this.setView}/>;
     } else if (stateName === 'details') {
-      singleProductElement = <ProductDetails productParams={stateParams} setView={this.setView}/>;
+      singleProductElement = <ProductDetails productParams={stateParams} setView={this.setView} addToCart={this.addToCart}/>;
     }
     return (
       <div className="salesCont">
