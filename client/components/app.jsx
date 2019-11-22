@@ -25,17 +25,21 @@ export default class App extends React.Component {
   getCartItems() {
     fetch('/api/cart')
       .then(response => response.json())
-      .then(cartItem => this.setState({ cart: cartItem }))
+      .then(cartItem => this.setState({ cart: this.state.cart.concat(cartItem) }))
       .catch(error => console.error('Fetch fail: ', error));
   }
 
   addToCart(product) {
     const request = {
-      method: 'POST'
+      method: 'POST',
+      body: JSON.stringify(product),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     };
     fetch('/api/cart', request)
       .then(response => response.json())
-      .then(product => this.setState({ cart: product }))
+      .then(product => this.setState({ cart: this.state.cart.concat(product) }))
       .catch(error => console.error('Add error: ', error));
   }
 
@@ -56,7 +60,7 @@ export default class App extends React.Component {
     }
     return (
       <div className="salesCont">
-        <Header text="Wicked Sales" cartItemCount={this.state.cart}/>
+        <Header text="Wicked Sales" cartItemCount={this.state.cart.length}/>
         <div className="container">
           {singleProductElement}
         </div>

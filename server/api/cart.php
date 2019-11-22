@@ -48,7 +48,7 @@ if($request['method'] === 'POST'){
                   WHERE c.cartId = $cartInsertId";
     $cartResult = mysqli_fetch_assoc($link->query($cartInfo));
     $response['body'] = $cartResult;
-    $_SESSION['cart_id'] = $cartId;
+    $_SESSION['cart_id'] = $cartInsertId;
     send($response);
   }
 }
