@@ -36,6 +36,8 @@ if($request['method'] === 'POST'){
                         VALUES (CURRENT_TIMESTAMP)";
       $cartItemId = mysqli_query($link, $createCartSql);
       $cartInsertId = mysqli_insert_id($link);
+    } else {
+      $cartInsertId = $_SESSION['cart_id'];
     }
     $cartInfoSql = "INSERT INTO `cartItems` (cartId, productId, price)
                     VALUES ($cartInsertId, $prodId, $priceArray)";
