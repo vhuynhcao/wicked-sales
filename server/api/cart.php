@@ -36,6 +36,8 @@ if($request['method'] === 'POST'){
                         VALUES (CURRENT_TIMESTAMP)";
       $cartItemId = mysqli_query($link, $createCartSql);
       $cartInsertId = mysqli_insert_id($link);
+    } else {
+      $cartInsertId = $_SESSION['cart_id'];
     }
     $cartInfoSql = "INSERT INTO `cartItems` (cartId, productId, price)
                     VALUES ($cartInsertId, $prodId, $priceArray)";
@@ -48,7 +50,7 @@ if($request['method'] === 'POST'){
                   WHERE c.cartId = $cartInsertId";
     $cartResult = mysqli_fetch_assoc($link->query($cartInfo));
     $response['body'] = $cartResult;
-    $_SESSION['cart_id'] = $cartId;
+    $_SESSION['cart_id'] = $cartInsertId;
     send($response);
   }
 }

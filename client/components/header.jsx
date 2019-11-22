@@ -7,6 +7,10 @@ function Header(props) {
         <i className="fas fa-dollar-sign mr-1"/>
         {props.text}
       </div>
+      <div className="float-right">
+        {props.cartItemCount} Items
+        <i className="fas fa-shopping-cart" />
+      </div>
     </nav>
   );
 }
