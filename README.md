@@ -1,6 +1,4 @@
-# wicked-sales
-
-> - Maintained by: `thebearingedge`
+# Wicked Sales
 
 A full stack LAMP & React shopping cart app.
 
