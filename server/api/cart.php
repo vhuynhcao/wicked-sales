@@ -8,9 +8,9 @@ if($request['method'] === 'GET'){
   } else {
     $cartId = $_SESSION['cart_id'];
     $cartInSess = "SELECT * FROM cartItems
-                  JOIN products
-                  ON cartItems.productId = products.productId
-                  WHERE cartId = $cartId";
+                            JOIN products
+                              ON cartItems.productId = products.productId
+                           WHERE cartId = $cartId";
     $result = [];
     $sqlQuery = mysqli_query($link, $cartInSess);
     while($cartQuery = mysqli_fetch_assoc($sqlQuery)){
@@ -47,7 +47,7 @@ if($request['method'] === 'POST'){
                   FROM products AS p
                   JOIN cartItems AS c
                   ON c.productId = p.productId
-                  WHERE c.cartId = $cartInsertId";
+                  WHERE c.cartItemId = $cartInfoInsert";
     $cartResult = mysqli_fetch_assoc($link->query($cartInfo));
     $response['body'] = $cartResult;
     $_SESSION['cart_id'] = $cartInsertId;
