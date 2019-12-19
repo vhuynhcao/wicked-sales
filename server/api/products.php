@@ -13,7 +13,8 @@ if($request['method']==='GET'){
 }
 
 function get_products($link){
-  $sql = "SELECT `productId`, `name`, `price`, `image`, `shortDescription` FROM `products`";
+  $sql = "SELECT `productId`, `name`, `price`, `image`, `shortDescription`
+            FROM `products`";
   $link->query($sql);
   $result = mysqli_query($link, $sql);
   $products_list = [];
@@ -25,7 +26,8 @@ function get_products($link){
 
 function one_product_detail($link, $itemId){
   if($_GET['productId'] >= 1){
-    $sqlId = "SELECT * FROM `products` WHERE `productId`=$itemId";
+    $sqlId = "SELECT * FROM `products`
+                      WHERE `productId`=$itemId";
     $link -> query($sqlId);
     $idResult = mysqli_query($link, $sqlId);
     $productOutcome = mysqli_fetch_assoc($idResult);

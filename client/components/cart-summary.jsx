@@ -4,6 +4,8 @@ import CartSummaryItems from './cart-summary-items';
 function CartSummary(props) {
   const cartItems = props.viewCart;
 
+  let totalPrice = 0;
+  cartItems.map(product => (totalPrice = totalPrice + product.price));
   return (
     <div>
       <div
@@ -13,10 +15,10 @@ function CartSummary(props) {
         {'< Back to Catalog'}
       </div>
       <h1>My Cart</h1>
-      {cartItems.map(item => (
-        <CartSummaryItems key={item.productId} cartInfo={item} />
-      ))}
-      <h2>Total Price $0</h2>
+      {cartItems.map(item => {
+        return <CartSummaryItems key={item.productId} cartInfo={item} />;
+      })}
+      <h2>Total Price {'$' + (totalPrice / 100).toFixed(2)}</h2>
     </div>
   );
 }
