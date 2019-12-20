@@ -24,7 +24,7 @@ class ProductDetails extends React.Component {
     }
     return (
       <div className="container-fluid">
-        <div className="backLink text-muted" onClick={() => this.props.setView('catalog', {})}>
+        <div className="linkPointer text-muted" onClick={() => this.props.setView('catalog', {})}>
           {'< Back to Catalog'}
         </div>
         <div className="card">

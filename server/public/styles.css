@@ -1,12 +1,19 @@
-.backLink {
+@font-face {
+  font-family: Adreena;
+  src: url(AdreenaScript-Demo.otf);
+}
+
+.linkPointer {
   cursor: pointer;
 }
 
-.hoverCard{
-  transition: transform .2s;
+.shopName{
+  font-family: Adreena;
+  font-size: 1.5rem;
 }
 
-.hoverCard:hover{
-  transform: scale(1.05);
-  cursor: pointer;
+.productBox{
+  height: 90vh;
+  border: 1px black solid;
+  border-radius: 5px;
 }

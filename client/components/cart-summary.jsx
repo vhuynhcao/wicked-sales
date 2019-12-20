@@ -28,7 +28,7 @@ function CartSummary(props) {
   return (
     <>
       <div
-        className="backLink text-muted"
+        className="linkPointer text-muted"
         onClick={() => props.setView('catalog')}
       >
         <i className="fas fa-angle-double-left mr-2"/>Back to Catalog
