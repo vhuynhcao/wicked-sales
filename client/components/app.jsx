@@ -10,7 +10,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'catalog',
+        name: 'checkout',
         params: {}
       },
       cart: []
@@ -85,7 +85,7 @@ export default class App extends React.Component {
     } else if (stateName === 'cart') {
       singleProductElement = <CartSummary setView={this.setView} viewCart={this.state.cart}/>;
     } else if (stateName === 'checkout') {
-      singleProductElement = <CheckoutForm setView={this.setView} placeOrder={this.placeOrder}/>;
+      singleProductElement = <CheckoutForm setView={this.setView} placeOrder={this.placeOrder} viewPrice={this.state.cart}/>;
     }
     return (
       <div className="salesCont">
