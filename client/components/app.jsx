@@ -52,6 +52,27 @@ export default class App extends React.Component {
     });
   }
 
+  placeOrder({ name, creditCard, shippingAddress }) {
+    const request = {
+      method: 'POST',
+      body: JSON.stringify({ name, creditCard, shippingAddress }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/orders', request)
+      .then(response => response.json())
+      .then(order => {
+        this.setState({
+          view: {
+            name: 'catalog',
+            params: {}
+          }
+        });
+      })
+      .then(error => console.error('Failed to post', error));
+  }
+
   render() {
     let singleProductElement;
     const stateName = this.state.view.name;
