@@ -1,6 +1,6 @@
 import React from 'react';
 
-class CheckoutFrom extends React.Component {
+class CheckoutForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,4 +30,4 @@ class CheckoutFrom extends React.Component {
   }
 }
 
-export default CheckoutFrom;
+export default CheckoutForm;
