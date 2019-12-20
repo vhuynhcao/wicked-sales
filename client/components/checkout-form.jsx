@@ -8,6 +8,11 @@ class CheckoutForm extends React.Component {
       creditCard: '',
       shippingAddress: ''
     };
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   render() {
@@ -23,6 +28,9 @@ class CheckoutForm extends React.Component {
           <div className="form-group">
             <label>Name</label>
             <input
+              name="name"
+              value={this.state.name}
+              onChange={this.handleInputChange}
               type="text"
               className="form-control"
               placeholder="Full Name"
@@ -31,28 +39,37 @@ class CheckoutForm extends React.Component {
           <div className="form-group">
             <label>Credit Card</label>
             <input
+              name="creditCard"
+              value={this.state.creditCard}
+              onChange={this.handleInputChange}
               type="text"
               className="form-control"
               placeholder="Credit Card"
             />
           </div>
-          <div className="from-group">
+          <div className="form-group">
             <label>Shipping Address</label>
-            <textarea type="text" className="form-control" />
+            <textarea
+              name="shippingAddress"
+              value={this.state.shippingAddress}
+              onChange={this.handleInputChange}
+              type="text"
+              className="form-control"
+            />
           </div>
         </form>
         <div className="container d-flex justify-content-between mt-3">
-          <i
-            className="backLink text-muted fas fa-angle-double-left mr-1"
-            onClick={() => this.props.setView('catalog')}
-          >
-            {' '}
+          <div className="backLink text-muted">
+            <i
+              className="fas fa-angle-double-left mr-2"
+              onClick={() => this.props.setView('catalog')}
+            />
             Continue Shopping
-          </i>
+          </div>
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => this.props.placeOrder()}
+            onClick={() => this.props.placeOrder(this.state)}
           >
             Place Order
           </button>
