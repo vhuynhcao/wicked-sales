@@ -3,13 +3,14 @@ import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
+import CheckoutForm from './checkout-form';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: {
-        name: 'catalog',
+        name: 'checkout',
         params: {}
       },
       cart: []
@@ -52,6 +53,27 @@ export default class App extends React.Component {
     });
   }
 
+  placeOrder({ name, creditCard, shippingAddress }) {
+    const request = {
+      method: 'POST',
+      body: JSON.stringify({ name, creditCard, shippingAddress }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/orders', request)
+      .then(response => response.json())
+      .then(order => {
+        this.setState({
+          view: {
+            name: 'catalog',
+            params: {}
+          }
+        });
+      })
+      .then(error => console.error('Failed to post', error));
+  }
+
   render() {
     let singleProductElement;
     const stateName = this.state.view.name;
@@ -62,6 +84,8 @@ export default class App extends React.Component {
       singleProductElement = <ProductDetails productParams={stateParams} setView={this.setView} addToCart={this.addToCart}/>;
     } else if (stateName === 'cart') {
       singleProductElement = <CartSummary setView={this.setView} viewCart={this.state.cart}/>;
+    } else if (stateName === 'checkout') {
+      singleProductElement = <CheckoutForm setView={this.setView} placeOrder={this.placeOrder} viewPrice={this.state.cart}/>;
     }
     return (
       <div className="salesCont">

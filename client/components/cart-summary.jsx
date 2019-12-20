@@ -18,21 +18,24 @@ function CartSummary(props) {
         {cartItems.map(item => {
           return <CartSummaryItems key={item.productId} cartInfo={item} />;
         })}
+        <div className="container d-flex justify-content-between">
+          <h2>Total Price {'$' + (totalPrice / 100).toFixed(2)}</h2>
+          <button type="button" className="btn btn-primary" onClick={() => props.setView('checkout')}>Checkout</button>
+        </div>
       </>
     );
   }
   return (
-    <div>
+    <>
       <div
         className="backLink text-muted"
         onClick={() => props.setView('catalog')}
       >
-        {'< Back to Catalog'}
+        <i className="fas fa-angle-double-left mr-2"/>Back to Catalog
       </div>
       <h1>My Cart</h1>
       {display}
-      <h2>Total Price {'$' + (totalPrice / 100).toFixed(2)}</h2>
-    </div>
+    </>
   );
 }
 
