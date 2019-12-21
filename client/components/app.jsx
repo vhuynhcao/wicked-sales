@@ -91,6 +91,7 @@ export default class App extends React.Component {
     } else if (stateName === 'checkout') {
       currentView = <CheckoutForm setView={this.setView} placeOrder={this.placeOrder} viewPrice={this.state.cart}/>;
     }
+
     return (
       <div className="salesCont">
         <Header text="Simply Creative" cartItemCount={this.state.cart.length} setView={this.setView}/>

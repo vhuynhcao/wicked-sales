@@ -29,7 +29,7 @@ if($request['method'] === 'POST'){
                           WHERE orderId = $orderId";
     $orderResult = mysqli_query($link, $orderSql);
     $orderSqlResult = mysqli_fetch_assoc($orderResult);
-    unset($cartId);
+    unset($_SESSION['cart_id']);
     $response['body'] = $orderSqlResult;
     send($response);
   }
