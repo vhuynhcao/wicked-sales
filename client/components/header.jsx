@@ -2,7 +2,7 @@ import React from 'react';
 
 function Header(props) {
   return (
-    <nav className="navbar navbar-light bg-light sticky-top">
+    <nav className="navbar navbar-light bg-light sticky-top header">
       <div className="nav-brand">
         <div className="shopName">{props.text}</div>
       </div>

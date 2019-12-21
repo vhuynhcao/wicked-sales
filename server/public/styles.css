@@ -3,6 +3,10 @@
   src: url(AdreenaScript-Demo.otf);
 }
 
+.header{
+  background-image: linear-gradient(rgba(218, 248, 248, 1), rgba(255,255,255,.2));
+}
+
 .linkPointer {
   cursor: pointer;
 }
