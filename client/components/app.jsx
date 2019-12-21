@@ -10,7 +10,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'checkout',
+        name: 'catalog',
         params: {}
       },
       cart: []
@@ -75,23 +75,27 @@ export default class App extends React.Component {
   }
 
   render() {
-    let singleProductElement;
+    let currentView;
     const stateName = this.state.view.name;
     const stateParams = this.state.view.params;
     if (stateName === 'catalog') {
-      singleProductElement = <ProductList setView={this.setView}/>;
+      currentView = (
+        <div className="productBox overflow-auto">
+          <ProductList setView={this.setView} />
+        </div>
+      );
     } else if (stateName === 'details') {
-      singleProductElement = <ProductDetails productParams={stateParams} setView={this.setView} addToCart={this.addToCart}/>;
+      currentView = <ProductDetails productParams={stateParams} setView={this.setView} addToCart={this.addToCart}/>;
     } else if (stateName === 'cart') {
-      singleProductElement = <CartSummary setView={this.setView} viewCart={this.state.cart}/>;
+      currentView = <CartSummary setView={this.setView} viewCart={this.state.cart}/>;
     } else if (stateName === 'checkout') {
-      singleProductElement = <CheckoutForm setView={this.setView} placeOrder={this.placeOrder} viewPrice={this.state.cart}/>;
+      currentView = <CheckoutForm setView={this.setView} placeOrder={this.placeOrder} viewPrice={this.state.cart}/>;
     }
     return (
       <div className="salesCont">
-        <Header text="Wicked Sales" cartItemCount={this.state.cart.length} setView={this.setView}/>
-        <div className="container">
-          {singleProductElement}
+        <Header text="Simply Creative" cartItemCount={this.state.cart.length} setView={this.setView}/>
+        <div className="container mt-4">
+          {currentView}
         </div>
       </div>
     );

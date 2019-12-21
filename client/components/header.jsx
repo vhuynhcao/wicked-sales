@@ -2,12 +2,14 @@ import React from 'react';
 
 function Header(props) {
   return (
-    <nav className="navbar navbar-dark bg-info sticky-top">
+    <nav className="navbar navbar-light bg-light sticky-top">
       <div className="nav-brand">
-        <i className="fas fa-dollar-sign mr-1"/>
-        {props.text}
+        <div className="shopName">{props.text}</div>
       </div>
-      <div className="backLink float-right" onClick={() => props.setView('cart')}>
+      <div
+        className="linkPointer float-right"
+        onClick={() => props.setView('cart')}
+      >
         {props.cartItemCount} Items
         <i className="fas fa-shopping-cart" />
       </div>

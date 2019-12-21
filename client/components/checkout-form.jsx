@@ -59,7 +59,7 @@ class CheckoutForm extends React.Component {
           </div>
         </form>
         <div className="container d-flex justify-content-between mt-3">
-          <div className="backLink text-muted">
+          <div className="linkPointer text-muted">
             <i
               className="fas fa-angle-double-left mr-2"
               onClick={() => this.props.setView('catalog')}
