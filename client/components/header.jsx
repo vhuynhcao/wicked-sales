@@ -2,9 +2,9 @@ import React from 'react';
 
 function Header(props) {
   return (
-    <nav className="navbar navbar-light bg-light sticky-top header">
+    <nav className="navbar sticky-top header">
       <div className="nav-brand">
-        <div className="shopName">{props.text}</div>
+        <div className="linkPointer shopName" onClick={() => props.setView('catalog')}>{props.text}</div>
       </div>
       <div
         className="linkPointer float-right"
