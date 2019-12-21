@@ -1,6 +1,6 @@
 # Wicked Sales
 
-(WIP) A full stack LAMP & React shopping cart app. (Products will be changed soon.)
+(WIP) A full stack LAMP & React shopping cart app.
 
 ## Technologies Used
 
@@ -28,7 +28,7 @@ Live link to come soon.
 
 ## Preview
 
-![alt text](https://github.com/vhuynhcao/wicked-sales/blob/master/server/public/images/wicked-sales.gif?raw=true "Wicked Sales preview")
+![alt text](https://github.com/vhuynhcao/wicked-sales/blob/master/server/public/images/simply-creative.gif?raw=true)
 
 
 #### System Requirements
@@ -41,8 +41,8 @@ Live link to come soon.
 
 1. Clone the repository.
 ```
-git clone https://github.com/vhuynhcao/grade-table
-cd grade-table
+git clone https://github.com/vhuynhcao/wicked-sales
+cd wicked-sales
 ```
 
 2. Install all dependencies with npm.
