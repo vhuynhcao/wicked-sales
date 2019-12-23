@@ -14,7 +14,7 @@
 
 ## Live Demo
 
-Live link to come soon.
+[Live](https://simplycreative.vn-codes.com/)
 
 ## Features
 
