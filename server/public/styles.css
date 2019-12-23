@@ -25,15 +25,13 @@ body{
   border-radius: 5px;
 }
 
-@media screen and (max-width: 600px),
-screen and (max-height: 750px) {
+@media screen and (max-width: 600px){
   .productBox{
     height: 75vh;
   }
 }
 
-@media screen and (min-width: 600px),
-screen and (min-height: 750px) {
+@media screen and (max-height: 600px) {
   .productBox {
     height: 70vh;
   }
