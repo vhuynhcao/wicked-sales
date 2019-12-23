@@ -80,7 +80,7 @@ export default class App extends React.Component {
     const stateParams = this.state.view.params;
     if (stateName === 'catalog') {
       currentView = (
-        <div className="productBox overflow-auto">
+        <div className="productBox">
           <ProductList setView={this.setView} />
         </div>
       );

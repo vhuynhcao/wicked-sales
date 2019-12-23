@@ -23,6 +23,7 @@ body{
   height: 90vh;
   border: 1px black solid;
   border-radius: 5px;
+  overflow-x: hidden;
 }
 
 @media screen and (max-width: 600px){
