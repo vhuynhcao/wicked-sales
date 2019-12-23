@@ -3,6 +3,9 @@
   src: url(AdreenaScript-Demo.otf);
 }
 
+body{
+  overflow: hidden;
+}
 .header{
   background-image: linear-gradient(rgba(218, 248, 248, 1), rgba(255,255,255,.2));
 }
@@ -20,4 +23,18 @@
   height: 90vh;
   border: 1px black solid;
   border-radius: 5px;
+}
+
+@media screen and (max-width: 600px),
+screen and (max-height: 750px) {
+  .productBox{
+    height: 75vh;
+  }
+}
+
+@media screen and (min-width: 600px),
+screen and (min-height: 750px) {
+  .productBox {
+    height: 70vh;
+  }
 }
