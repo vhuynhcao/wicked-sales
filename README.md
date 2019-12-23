@@ -1,4 +1,4 @@
-# Wicked Sales
+# Simply Creative
 
 (WIP) A full stack LAMP & React shopping cart app.
 
@@ -41,8 +41,8 @@ Live link to come soon.
 
 1. Clone the repository.
 ```
-git clone https://github.com/vhuynhcao/wicked-sales
-cd wicked-sales
+git clone https://github.com/vhuynhcao/simply-creative
+cd simply-creative
 ```
 
 2. Install all dependencies with npm.
