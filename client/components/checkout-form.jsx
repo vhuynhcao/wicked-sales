@@ -23,7 +23,7 @@ class CheckoutForm extends React.Component {
 
   render() {
     const { name, creditCard, shippingAddress } = this.state;
-    const isEnabled = name.length > 0 && creditCard > 0 && shippingAddress > 0;
+    const isEnabled = name.length > 0 && creditCard.length > 0 && shippingAddress.length > 0;
     let totalPrice = 0;
     this.props.viewPrice.map(product => (totalPrice = totalPrice + product.price));
     return (

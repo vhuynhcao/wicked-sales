@@ -23,6 +23,11 @@ class ProductDetails extends React.Component {
       return null;
     }
 
+    const imgFit = {
+      maxHeight: '225px',
+      objectFit: 'contain'
+    };
+
     return (
       <div className="container-fluid">
         <div
@@ -35,7 +40,7 @@ class ProductDetails extends React.Component {
         <div className="card">
           <div className="row no-gutters mb-4">
             <div className="col-md-4">
-              <img
+              <img style={imgFit}
                 src={singleProduct.image}
                 className="img-fluid float-left ml-2 mt-2"
               />
