@@ -10,7 +10,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'catalog',
+        name: 'checkout',
         params: {}
       },
       cart: []
@@ -18,6 +18,7 @@ export default class App extends React.Component {
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.placeOrder = this.placeOrder.bind(this);
   }
 
   componentDidMount() {
@@ -68,10 +69,10 @@ export default class App extends React.Component {
           view: {
             name: 'catalog',
             params: {}
-          }
+          },
+          cart: []
         });
-      })
-      .then(error => console.error('Failed to post', error));
+      });
   }
 
   render() {
@@ -80,7 +81,7 @@ export default class App extends React.Component {
     const stateParams = this.state.view.params;
     if (stateName === 'catalog') {
       currentView = (
-        <div className="productBox overflow-auto">
+        <div className="productBox">
           <ProductList setView={this.setView} />
         </div>
       );
