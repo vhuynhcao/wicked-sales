@@ -20,7 +20,7 @@ function CartSummary(props) {
         })}
         <div className="container d-flex justify-content-between">
           <h2>Total Price {'$' + (totalPrice / 100).toFixed(2)}</h2>
-          <button type="button" className="btn btn-primary" onClick={() => props.setView('checkout')}>Checkout</button>
+          <button type="button" className="linkPointer btn btn-primary" onClick={() => props.setView('checkout')}>Checkout</button>
         </div>
       </>
     );
