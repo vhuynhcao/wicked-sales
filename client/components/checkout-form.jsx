@@ -75,7 +75,7 @@ class CheckoutForm extends React.Component {
               <i className="fas fa-angle-double-left mr-2" />
               Continue Shopping
             </div>
-            <button disabled={!isEnabled} type="submit" className="btn btn-primary">
+            <button disabled={!isEnabled} type="submit" className="linkPointer btn btn-primary">
               Place Order
             </button>
           </div>

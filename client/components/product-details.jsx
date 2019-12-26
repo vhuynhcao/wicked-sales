@@ -24,7 +24,7 @@ class ProductDetails extends React.Component {
     }
 
     const imgFit = {
-      maxHeight: '225px',
+      maxHeight: '200px',
       objectFit: 'contain'
     };
 
@@ -52,7 +52,7 @@ class ProductDetails extends React.Component {
                   {'$' + (singleProduct.price / 100).toFixed(2)}
                 </h4>
                 <p className="card-text">{singleProduct.shortDescription}</p>
-                <button onClick={() => this.props.addToCart(singleProduct)}>
+                <button className="linkPointer btn btn-secondary"onClick={() => this.props.addToCart(singleProduct)}>
                   Add to Cart
                 </button>
               </div>
