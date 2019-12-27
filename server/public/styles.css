@@ -6,8 +6,10 @@
 body{
   overflow-x: hidden;
 }
+
 .header{
   background-image: linear-gradient(rgba(218, 248, 248, 1), rgba(255,255,255,.2));
+  z-index: 1;
 }
 
 .modalBox{
@@ -23,8 +25,7 @@ body{
 
 .innerModal{
   position: absolute;
-  height: 29vh;
-  width: 37%;
+  max-width: 350px;
   text-align: center;
   top: 15%;
   border: 1px solid black;
