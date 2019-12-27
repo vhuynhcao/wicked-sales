@@ -10,6 +10,27 @@ body{
   background-image: linear-gradient(rgba(218, 248, 248, 1), rgba(255,255,255,.2));
 }
 
+.modalBox{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .6);
+  z-index: 2;
+  top: 0;
+  right: 0;
+  justify-content: center;
+}
+
+.innerModal{
+  position: absolute;
+  height: 29vh;
+  width: 37%;
+  text-align: center;
+  top: 15%;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
 .linkPointer {
   cursor: pointer;
 }
