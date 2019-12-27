@@ -4,6 +4,7 @@ import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
+import DemoModal from './demo-modal';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,12 +14,15 @@ export default class App extends React.Component {
         name: 'catalog',
         params: {}
       },
-      cart: []
+      cart: [],
+      isOpen: true
     };
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+    this.showModal = this.showModal.bind(this);
   }
 
   componentDidMount() {
@@ -75,6 +79,14 @@ export default class App extends React.Component {
       });
   }
 
+  showModal() {
+    this.setState({ isOpen: true });
+  }
+
+  hideModal() {
+    this.setState({ isOpen: false });
+  }
+
   render() {
     let currentView;
     const stateName = this.state.view.name;
@@ -92,14 +104,17 @@ export default class App extends React.Component {
     } else if (stateName === 'checkout') {
       currentView = <CheckoutForm setView={this.setView} placeOrder={this.placeOrder} viewPrice={this.state.cart}/>;
     }
-
+    const showModal = this.state.isOpen ? <DemoModal close={this.hideModal}/> : null;
     return (
-      <div className="salesCont">
-        <Header text="Simply Creative" cartItemCount={this.state.cart.length} setView={this.setView}/>
-        <div className="container mt-4">
-          {currentView}
-        </div>
-      </div>
+      <>
+        <div className="container">{showModal}</div>
+        <Header
+          text="Simply Creative"
+          cartItemCount={this.state.cart.length}
+          setView={this.setView}
+        />
+        <div className="container mt-4">{currentView}</div>
+      </>
     );
 
   }

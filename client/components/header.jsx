@@ -2,7 +2,7 @@ import React from 'react';
 
 function Header(props) {
   return (
-    <nav className="navbar sticky-top header">
+    <nav className="navbar sticky-top bg-light header">
       <div className="nav-brand">
         <div
           className="linkPointer shopName"
