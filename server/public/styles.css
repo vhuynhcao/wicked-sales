@@ -6,20 +6,21 @@
 body{
   overflow-x: hidden;
 }
+
 .header{
   background-image: linear-gradient(rgba(218, 248, 248, 1), rgba(255,255,255,.2));
 }
 
-.linkPointer {
+.link-pointer {
   cursor: pointer;
 }
 
-.shopName{
+.shop-name{
   font-family: Adreena;
   font-size: 1.5rem;
 }
 
-.productBox{
+.product-box{
   height: 90vh;
   border: 1px black solid;
   border-radius: 5px;
@@ -27,13 +28,13 @@ body{
 }
 
 @media screen and (max-width: 600px){
-  .productBox{
+  .product-box{
     height: 75vh;
   }
 }
 
 @media screen and (max-height: 600px) {
-  .productBox {
+  .product-box {
     height: 70vh;
   }
 }

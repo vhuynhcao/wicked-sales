@@ -81,7 +81,7 @@ export default class App extends React.Component {
     const stateParams = this.state.view.params;
     if (stateName === 'catalog') {
       currentView = (
-        <div className="productBox">
+        <div className="product-box">
           <ProductList setView={this.setView} />
         </div>
       );
