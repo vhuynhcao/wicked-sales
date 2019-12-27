@@ -31,7 +31,7 @@ class ProductDetails extends React.Component {
     return (
       <div className="container-fluid">
         <div
-          className="link-pointer text-muted"
+          className="linkPointer text-muted"
           onClick={() => this.props.setView('catalog', {})}
         >
           <i className="fas fa-angle-double-left mr-2" />
@@ -52,7 +52,7 @@ class ProductDetails extends React.Component {
                   {'$' + (singleProduct.price / 100).toFixed(2)}
                 </h4>
                 <p className="card-text">{singleProduct.shortDescription}</p>
-                <button className="link-pointer btn btn-secondary"onClick={() => this.props.addToCart(singleProduct)}>
+                <button className="linkPointer btn btn-secondary"onClick={() => this.props.addToCart(singleProduct)}>
                   Add to Cart
                 </button>
               </div>
