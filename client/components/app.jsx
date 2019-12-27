@@ -4,7 +4,7 @@ import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
-import Modal from './modal';
+import DemoModal from './demo-modal';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -104,9 +104,9 @@ export default class App extends React.Component {
     } else if (stateName === 'checkout') {
       currentView = <CheckoutForm setView={this.setView} placeOrder={this.placeOrder} viewPrice={this.state.cart}/>;
     }
-    const showModal = this.state.isOpen ? <Modal close={this.hideModal}/> : null;
+    const showModal = this.state.isOpen ? <DemoModal close={this.hideModal}/> : null;
     return (
-      <div className="salesCont">
+      <>
         <div className="container">{showModal}</div>
         <Header
           text="Simply Creative"
@@ -114,7 +114,7 @@ export default class App extends React.Component {
           setView={this.setView}
         />
         <div className="container mt-4">{currentView}</div>
-      </div>
+      </>
     );
 
   }
