@@ -33,6 +33,7 @@ class CheckoutForm extends React.Component {
           Order Total: {'$' + (totalPrice / 100).toFixed(2)}
         </h4>
         <form className="mt-4" onSubmit={this.handleInputSubmit}>
+          <p className="warning">Please do not use real personal information in the form.</p>
           <div className="form-group">
             <label>Name</label>
             <input

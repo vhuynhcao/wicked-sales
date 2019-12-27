@@ -41,6 +41,10 @@ body{
   font-size: 1.5rem;
 }
 
+.warning {
+  font-style: oblique;
+  color: red;
+}
 .productBox{
   height: 90vh;
   border: 1px black solid;
