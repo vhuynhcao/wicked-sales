@@ -1,12 +1,19 @@
 import React from 'react';
+import CartOrContinueModal from './cart-cont-modal';
 
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: null
+      product: null,
+      isOpen: false
     };
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.showModal = this.showModal.bind(this);
+  }
+
+  showModal() {
+    this.setState({ isOpen: !this.state.isOpen });
   }
 
   componentDidMount() {
@@ -23,6 +30,8 @@ class ProductDetails extends React.Component {
       return null;
     }
 
+    const cartContModal = this.state.isOpen ? <CartOrContinueModal setView={this.props.setView} product={singleProduct}/> : null;
+
     const imgFit = {
       maxHeight: '200px',
       objectFit: 'contain'
@@ -30,6 +39,7 @@ class ProductDetails extends React.Component {
 
     return (
       <div className="container-fluid">
+        <>{cartContModal}</>
         <div
           className="linkPointer text-muted"
           onClick={() => this.props.setView('catalog', {})}
@@ -52,13 +62,17 @@ class ProductDetails extends React.Component {
                   {'$' + (singleProduct.price / 100).toFixed(2)}
                 </h4>
                 <p className="card-text">{singleProduct.shortDescription}</p>
-                <button className="linkPointer btn btn-secondary"onClick={() => this.props.addToCart(singleProduct)}>
+                <button className="linkPointer btn btn-secondary"
+                  onClick={() => {
+                    this.showModal();
+                    this.props.addToCart(singleProduct);
+                  }}>
                   Add to Cart
                 </button>
               </div>
             </div>
           </div>
-          <div className="container card-text">
+          <div className="container card-text mb-3">
             {singleProduct.longDescription}
           </div>
         </div>
