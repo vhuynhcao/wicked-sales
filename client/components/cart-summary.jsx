@@ -18,7 +18,7 @@ function CartSummary(props) {
         {cartItems.map(item => {
           return <CartSummaryItems key={item.productId} cartInfo={item} />;
         })}
-        <div className="container d-flex justify-content-between">
+        <div className="container d-flex justify-content-between mb-5">
           <h2>Total Price {'$' + (totalPrice / 100).toFixed(2)}</h2>
           <button type="button" className="linkPointer btn btn-primary" onClick={() => props.setView('checkout')}>Checkout</button>
         </div>
