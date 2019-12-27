@@ -7,7 +7,7 @@ function ProductListItem(props) {
   };
   return (
     <div className="col-md-3 d-flex align-items-stretch my-2">
-      <div className="card link-pointer" onClick={() => props.setView('details', { product: props.id })}>
+      <div className="card linkPointer" onClick={() => props.setView('details', { product: props.id })}>
         <img className="card-img-top" style={imgSize} src={props.image}/>
         <div className="card-body d-flex flex-column justify-content-around">
           <h4 className="card-title">{props.name}</h4>
