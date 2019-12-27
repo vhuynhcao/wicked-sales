@@ -5,14 +5,14 @@ function Header(props) {
     <nav className="navbar sticky-top header">
       <div className="nav-brand">
         <div
-          className="linkPointer shopName"
+          className="link-pointer shop-name"
           onClick={() => props.setView('catalog')}
         >
           {props.text}
         </div>
       </div>
       <div
-        className="linkPointer float-right"
+        className="link-pointer float-right"
         onClick={() => props.setView('cart')}
       >
         {props.cartItemCount} Items{' '}

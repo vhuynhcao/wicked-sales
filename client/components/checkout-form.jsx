@@ -69,13 +69,13 @@ class CheckoutForm extends React.Component {
           </div>
           <div className="container d-flex justify-content-between mt-3 mb-5">
             <div
-              className="linkPointer text-muted"
+              className="link-pointer text-muted"
               onClick={() => this.props.setView('catalog')}
             >
               <i className="fas fa-angle-double-left mr-2" />
               Continue Shopping
             </div>
-            <button disabled={!isEnabled} type="submit" className="linkPointer btn btn-primary">
+            <button disabled={!isEnabled} type="submit" className="link-pointer btn btn-primary">
               Place Order
             </button>
           </div>
