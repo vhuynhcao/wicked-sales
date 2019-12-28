@@ -1,6 +1,7 @@
 <?php
 
 $link = get_db_link();
+$cartId = $_SESSION['cart_id'];
 
 if($request['method'] === 'GET'){
   if(!isset($_SESSION['cart_id'])) {
@@ -10,7 +11,7 @@ if($request['method'] === 'GET'){
     $cartInSess = "SELECT * FROM cartItems
                             JOIN products
                               ON cartItems.productId = products.productId
-                           WHERE cartId = $cartId";
+                            WHERE cartId = $cartId";
     $result = [];
     $sqlQuery = mysqli_query($link, $cartInSess);
     while($cartQuery = mysqli_fetch_assoc($sqlQuery)){
@@ -51,6 +52,22 @@ if($request['method'] === 'POST'){
     $cartResult = mysqli_fetch_assoc($link->query($cartInfo));
     $response['body'] = $cartResult;
     $_SESSION['cart_id'] = $cartInsertId;
+    send($response);
+  }
+}
+
+if ($request['method'] === 'DELETE') {
+  $productId = $request['body']['productId'];
+  $cartItemId = $request['body']['cartItemId'];
+  if (!isset($productId) || !isset($cartItemId) || !isset($cartId)) {
+    throw new ApiError('Product ID is not valid', 400);
+  } else {
+    $removeItem = "DELETE FROM cartItems
+                          WHERE cartItemId = $cartItemId
+                          AND productId = $productId
+                          AND cartId = $cartId";
+    $removeResult = mysqli_query($link, $removeItem);
+    $response['body'] = 'Product has been successfully removed';
     send($response);
   }
 }

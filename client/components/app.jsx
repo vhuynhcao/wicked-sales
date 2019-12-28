@@ -23,6 +23,7 @@ export default class App extends React.Component {
     this.placeOrder = this.placeOrder.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.showModal = this.showModal.bind(this);
+    this.removeCartItems = this.removeCartItems.bind(this);
   }
 
   componentDidMount() {
@@ -32,7 +33,23 @@ export default class App extends React.Component {
   getCartItems() {
     fetch('/api/cart')
       .then(response => response.json())
-      .then(cartItem => this.setState({ cart: this.state.cart.concat(cartItem) }))
+      .then(cartItem =>
+        this.setState({ cart: this.state.cart.concat(cartItem) })
+      )
+      .catch(error => console.error('Fetch fail: ', error));
+  }
+
+  removeCartItems({ cartItemId, productId }) {
+    const request = {
+      method: 'DELETE',
+      body: JSON.stringify({ cartItemId, productId }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/cart', request)
+      .then(response => response.json())
+      .then(deleted => this.getCartItems())
       .catch(error => console.error('Fetch fail: ', error));
   }
 
@@ -61,7 +78,11 @@ export default class App extends React.Component {
   placeOrder({ name, creditCard, shippingAddress }) {
     const request = {
       method: 'POST',
-      body: JSON.stringify({ name, creditCard, shippingAddress }),
+      body: JSON.stringify({
+        name,
+        creditCard,
+        shippingAddress
+      }),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -93,18 +114,38 @@ export default class App extends React.Component {
     const stateParams = this.state.view.params;
     if (stateName === 'catalog') {
       currentView = (
-        <div className="productBox">
+        <div className="productBox col-md-12">
           <ProductList setView={this.setView} />
         </div>
       );
     } else if (stateName === 'details') {
-      currentView = <ProductDetails productParams={stateParams} setView={this.setView} addToCart={this.addToCart}/>;
+      currentView = (
+        <ProductDetails
+          productParams={stateParams}
+          setView={this.setView}
+          addToCart={this.addToCart}
+        />
+      );
     } else if (stateName === 'cart') {
-      currentView = <CartSummary setView={this.setView} viewCart={this.state.cart}/>;
+      currentView = (
+        <CartSummary
+          setView={this.setView}
+          viewCart={this.state.cart}
+          deleteItem={this.removeCartItems}
+        />
+      );
     } else if (stateName === 'checkout') {
-      currentView = <CheckoutForm setView={this.setView} placeOrder={this.placeOrder} viewPrice={this.state.cart}/>;
+      currentView = (
+        <CheckoutForm
+          setView={this.setView}
+          placeOrder={this.placeOrder}
+          viewPrice={this.state.cart}
+        />
+      );
     }
-    const showModal = this.state.isOpen ? <DemoModal close={this.hideModal}/> : null;
+    const showModal = this.state.isOpen ? (
+      <DemoModal close={this.hideModal} />
+    ) : null;
     return (
       <>
         <div className="container">{showModal}</div>
@@ -116,6 +157,5 @@ export default class App extends React.Component {
         <div className="container mt-4">{currentView}</div>
       </>
     );
-
   }
 }
