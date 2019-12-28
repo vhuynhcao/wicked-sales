@@ -151,7 +151,7 @@ export default class App extends React.Component {
         <div className="container">{showModal}</div>
         <Header
           text="Simply Creative"
-          cartItemCount={this.state.cart.length}
+          cartItemCount={this.state.cart}
           setView={this.setView}
         />
         <div className="container mt-4">{currentView}</div>
