@@ -54,3 +54,19 @@ if($request['method'] === 'POST'){
     send($response);
   }
 }
+
+if ($request['method'] === 'DELETE') {
+  $productId = $request['body']['productId'];
+  $cartItemId = $request['body']['cartItemId'];
+  if (!isset($productId) || !isset($cartItemId) || !isset($cartId)) {
+    throw new ApiError('Product ID is not valid', 400);
+  } else {
+    $removeItem = "DELETE FROM cartItems
+                          WHERE cartItemId = $cartItemId
+                          AND productId = $productId
+                          AND cartId = $cartId";
+    $removeResult = mysqli_query($link, $removeItem);
+    $response['body'] = 'Product has been successfully removed';
+    send($response);
+  }
+}
