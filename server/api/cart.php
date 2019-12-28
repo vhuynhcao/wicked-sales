@@ -1,6 +1,7 @@
 <?php
 
 $link = get_db_link();
+$cartId = $_SESSION['cart_id'];
 
 if($request['method'] === 'GET'){
   if(!isset($_SESSION['cart_id'])) {
@@ -10,7 +11,7 @@ if($request['method'] === 'GET'){
     $cartInSess = "SELECT * FROM cartItems
                             JOIN products
                               ON cartItems.productId = products.productId
-                           WHERE cartId = $cartId";
+                            WHERE cartId = $cartId";
     $result = [];
     $sqlQuery = mysqli_query($link, $cartInSess);
     while($cartQuery = mysqli_fetch_assoc($sqlQuery)){
