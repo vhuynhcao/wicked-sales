@@ -16,7 +16,7 @@ function CartSummary(props) {
     display = (
       <>
         {cartItems.map(item => {
-          return <CartSummaryItems key={item.productId} cartInfo={item} deleteItem={props.deleteItem} />;
+          return <CartSummaryItems key={item.productId} cartInfo={item} deleteItem={props.deleteItem} setView={props.setView}/>;
         })}
         <div className="container d-flex justify-content-between mb-5">
           <h2>Total Price {'$' + (totalPrice / 100).toFixed(2)}</h2>
