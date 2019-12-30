@@ -14,10 +14,8 @@ if($request['method'] === 'GET'){
                             WHERE cartId = $cartId";
     $result = [];
     $sqlQuery = mysqli_query($link, $cartInSess);
-    while($cartQuery = mysqli_fetch_assoc($sqlQuery)){
-      $result[] = $cartQuery;
-    }
-    $response['body'] = $result;
+    $cartQuery = mysqli_fetch_all($sqlQuery, MYSQLI_ASSOC);
+    $response['body'] = $cartQuery;
   }
   send($response);
 }
@@ -31,15 +29,16 @@ if($request['method'] === 'POST'){
     $priceSql = "SELECT price
                 FROM products
                 WHERE productId = $productId";
-    $priceResult = mysqli_fetch_assoc($link->query($priceSql));
+    $priceQuery = mysqli_query($link, $priceSql);
+    $priceResult = mysqli_fetch_assoc($priceQuery);
     $priceArray = $priceResult['price'];
     if(!isset($_SESSION['cart_id'])){
       $createCartSql = "INSERT INTO carts (createdAt)
                         VALUES (CURRENT_TIMESTAMP)";
       $cartItemId = mysqli_query($link, $createCartSql);
-      $cartInsertId = mysqli_insert_id($link);
+      $cartId = mysqli_insert_id($link);
     } else {
-      $cartInsertId = $_SESSION['cart_id'];
+      $cartId = $_SESSION['cart_id'];
     }
     $cartInfoSql = "INSERT INTO `cartItems` (cartId, productId, price, quantity)
                     VALUES ($cartId, $productId, $priceArray, 1)
@@ -52,7 +51,8 @@ if($request['method'] === 'POST'){
                   JOIN cartItems AS c
                   ON c.productId = p.productId
                   WHERE c.cartItemId = $cartItemId";
-    $cartResult = mysqli_fetch_assoc($link->query($cartInfo));
+    $cartInfoQuery = mysqli_query($link, $cartInfo);
+    $cartResult = mysqli_fetch_assoc($cartInfoQuery);
     $response['body'] = $cartResult;
     $_SESSION['cart_id'] = $cartId;
     send($response);

@@ -15,6 +15,8 @@ class CartSummaryItems extends React.Component {
   }
 
   render() {
+    const productId = this.props.cartInfo.productId;
+    const quantity = this.props.cartInfo.quantity;
     const imgSize = {
       maxHeight: '200px',
       objectFit: 'contain'
@@ -51,6 +53,16 @@ class CartSummaryItems extends React.Component {
               >
                 Remove Item
               </p>
+              <div>
+                <i
+                  className="fas fa-minus-square"
+                  onClick={() =>
+                    this.props.updateCart({ productId, operator: '-' })
+                  }
+                ></i>
+                {quantity}
+                <i className="fas fa-plus-square" onClick={() => this.props.updateCart({ productId, operator: '+' })}></i>
+              </div>
             </div>
           </div>
         </div>

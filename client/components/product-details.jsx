@@ -25,6 +25,7 @@ class ProductDetails extends React.Component {
   }
 
   render() {
+    const addToCart = this.props.addToCart;
     const singleProduct = this.state.product;
     if (!singleProduct) {
       return null;
@@ -65,7 +66,7 @@ class ProductDetails extends React.Component {
                 <button className="linkPointer btn btn-secondary"
                   onClick={() => {
                     this.showModal();
-                    this.props.addToCart(singleProduct);
+                    addToCart({ productId: singleProduct.productId, operator: '+' });
                   }}>
                   Add to Cart
                 </button>

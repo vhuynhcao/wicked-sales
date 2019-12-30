@@ -19,7 +19,7 @@ export default class App extends React.Component {
     };
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
-    this.addToCart = this.addToCart.bind(this);
+    this.updateCartItems = this.updateCartItems.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.showModal = this.showModal.bind(this);
@@ -53,19 +53,17 @@ export default class App extends React.Component {
       .catch(error => console.error('Fetch fail: ', error));
   }
 
-  addToCart(product) {
+  updateCartItems({ productId, operator }) {
     const request = {
       method: 'POST',
-      body: JSON.stringify(product),
+      body: JSON.stringify({ productId, operator }),
       headers: {
         'Content-Type': 'application/json'
       }
     };
     fetch('/api/cart', request)
       .then(response => response.json())
-      .then(product => {
-        this.setState({ cart: this.state.cart.concat(product) });
-      })
+      .then(product => this.getCartItems())
       .catch(error => console.error('Add error: ', error));
   }
 
@@ -123,7 +121,7 @@ export default class App extends React.Component {
         <ProductDetails
           productParams={stateParams}
           setView={this.setView}
-          addToCart={this.addToCart}
+          addToCart={this.updateCartItems}
         />
       );
     } else if (stateName === 'cart') {
@@ -132,6 +130,7 @@ export default class App extends React.Component {
           setView={this.setView}
           viewCart={this.state.cart}
           deleteItem={this.removeCartItems}
+          updateCart={this.updateCartItems}
         />
       );
     } else if (stateName === 'checkout') {
