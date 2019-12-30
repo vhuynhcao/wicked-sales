@@ -142,9 +142,11 @@ export default class App extends React.Component {
         />
       );
     }
+
     const showModal = this.state.isOpen ? (
       <DemoModal close={this.hideModal} />
     ) : null;
+
     return (
       <>
         <div className="container">{showModal}</div>

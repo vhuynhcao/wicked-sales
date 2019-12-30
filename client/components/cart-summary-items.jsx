@@ -56,12 +56,10 @@ class CartSummaryItems extends React.Component {
               <div>
                 <i
                   className="fas fa-minus-square"
-                  onClick={() =>
-                    this.props.updateCart({ productId, operator: '-' })
-                  }
-                ></i>
+                  onClick={() => { this.props.updateCart({ productId, operator: '-' }); }}></i>
                 {quantity}
-                <i className="fas fa-plus-square" onClick={() => this.props.updateCart({ productId, operator: '+' })}></i>
+                <i className="fas fa-plus-square"
+                  onClick={() => { this.props.updateCart({ productId, operator: '+' }); }}></i>
               </div>
             </div>
           </div>
