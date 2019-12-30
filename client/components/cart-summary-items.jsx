@@ -53,13 +53,32 @@ class CartSummaryItems extends React.Component {
               >
                 Remove Item
               </p>
-              <div>
-                <i
-                  className="fas fa-minus-square"
-                  onClick={() => { this.props.updateCart({ productId, operator: '-' }); }}></i>
-                {quantity}
-                <i className="fas fa-plus-square"
-                  onClick={() => { this.props.updateCart({ productId, operator: '+' }); }}></i>
+              <div className="d-flex">
+                <h5 className="mr-3 my-auto">Quantity: </h5>
+                <div
+                  className="d-flex btn-group btn-group-sm border border-secondary rounded quantity-box"
+                  role="group"
+                >
+                  <button
+                    className="linkPointer rounded-sm btn-light"
+                    type="button"
+                    onClick={() => {
+                      this.props.updateCart({ productId, operator: '-' });
+                    }}
+                  >
+                    <i className="fas fa-minus" />
+                  </button>
+                  <div className="mx-3">{quantity}</div>
+                  <button
+                    className="linkPointer rounded-sm btn-light"
+                    type="button"
+                    onClick={() => {
+                      this.props.updateCart({ productId, operator: '+' });
+                    }}
+                  >
+                    <i className="fas fa-plus" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>

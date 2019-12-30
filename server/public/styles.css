@@ -64,3 +64,11 @@ body{
     height: 70vh;
   }
 }
+
+.quantity-box{
+  width: fit-content;
+}
+
+.quantity-number{
+  font-size: larger;
+}
