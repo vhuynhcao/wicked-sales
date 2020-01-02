@@ -63,7 +63,18 @@ export default class App extends React.Component {
     };
     fetch('/api/cart', request)
       .then(response => response.json())
-      .then(product => this.getCartItems())
+      .then(product => {
+        if (this.state.cart.some(cartItem => cartItem.productId === product.productId)) {
+          const cart = this.state.cart.filter(cartItem => {
+            return cartItem.cartItemId !== product.cartItemId;
+          });
+          cart.push(product);
+          this.setState({ cart });
+        } else {
+          this.setState({ cart: this.state.cart.concat(product) });
+        }
+      }
+      )
       .catch(error => console.error('Add error: ', error));
   }
 

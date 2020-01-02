@@ -68,7 +68,7 @@ class CartSummaryItems extends React.Component {
                   >
                     <i className="fas fa-minus" />
                   </button>
-                  <div className="mx-3">{quantity}</div>
+                  <div className="mx-3 quantity-number">{quantity}</div>
                   <button
                     className="linkPointer rounded-sm btn-light"
                     type="button"
