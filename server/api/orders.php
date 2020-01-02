@@ -7,7 +7,8 @@ if($request['method'] === 'POST'){
   if(!isset($cartId)){
     throw new ApiError('Inactive shopping cart', 400);
   } else {
-    $name = $request['body']['name'];
+    $firstName = $request['body']['firstName'];
+    $lastName = $request['body']['lastName'];
     $creditCard = $request['body']['creditCard'];
     $shippingAddress = $request['body']['shippingAddress'];
     if (!isset($name)){
@@ -19,10 +20,10 @@ if($request['method'] === 'POST'){
     if (!isset($shippingAddress)){
       throw new ApiError('Shipping information is needed', 400);
     }
-    $insertOrder = "INSERT INTO orders (cartId, name, creditCard, shippingAddress)
-                          VALUES (?, ?, ?, ?)";
+    $insertOrder = "INSERT INTO orders (cartId, firstName, lastName, creditCard, shippingAddress)
+                          VALUES (?, ?, ?, ?, ?)";
     $prepareInsertOrder = mysqli_prepare($link, $insertOrder);
-    $bindPrepare = mysqli_stmt_bind_param ($prepareInsertOrder, 'isis', $cartId, $name, $creditCard, $shippingAddress);
+    $bindPrepare = mysqli_stmt_bind_param ($prepareInsertOrder, 'issis', $cartId, $firstName, $lastName, $creditCard, $shippingAddress);
     $executePrepare = mysqli_stmt_execute($prepareInsertOrder);
     $orderId = mysqli_insert_id($link);
     $orderSql = "SELECT * FROM orders

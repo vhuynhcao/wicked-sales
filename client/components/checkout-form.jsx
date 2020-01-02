@@ -4,7 +4,8 @@ class CheckoutForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      firstName: '',
+      lastName: '',
       creditCard: '',
       shippingAddress: ''
     };
@@ -22,8 +23,8 @@ class CheckoutForm extends React.Component {
   }
 
   render() {
-    const { name, creditCard, shippingAddress } = this.state;
-    const isEnabled = name.length > 0 && creditCard.length > 0 && shippingAddress.length > 0;
+    const { firstName, lastName, creditCard, shippingAddress } = this.state;
+    const isEnabled = firstName.length > 1 && lastName.length > 1 && creditCard.length > 0 && shippingAddress.length > 0;
     let totalPrice = 0;
     this.props.viewPrice.map(product => (totalPrice = totalPrice + product.price));
     return (
@@ -33,17 +34,32 @@ class CheckoutForm extends React.Component {
           Order Total: {'$' + (totalPrice / 100).toFixed(2)}
         </h4>
         <form className="mt-4" onSubmit={this.handleInputSubmit}>
-          <p className="warning">Please do not use real personal information in the form.</p>
-          <div className="form-group">
-            <label>Name</label>
-            <input
-              name="name"
-              value={this.state.name}
-              onChange={this.handleInputChange}
-              type="text"
-              className="form-control"
-              placeholder="Full Name"
-            />
+          <p className="warning">
+            Please do not use real personal information in the form.
+          </p>
+          <div className="row">
+            <div className="col">
+              <label>Given Name</label>
+              <input
+                name="firstName"
+                value={this.state.firstName}
+                onChange={this.handleInputChange}
+                type="text"
+                className="form-control"
+                placeholder="Given Name"
+              />
+            </div>
+            <div className="col">
+              <label>Family Name</label>
+              <input
+                name="lastName"
+                value={this.state.lastName}
+                onChange={this.handleInputChange}
+                type="text"
+                className="form-control"
+                placeholder="Family Name"
+              />
+            </div>
           </div>
           <div className="form-group">
             <label>Credit Card</label>
@@ -76,7 +92,11 @@ class CheckoutForm extends React.Component {
               <i className="fas fa-angle-double-left mr-2" />
               Continue Shopping
             </div>
-            <button disabled={!isEnabled} type="submit" className="linkPointer btn btn-primary">
+            <button
+              disabled={!isEnabled}
+              type="submit"
+              className="linkPointer btn btn-primary"
+            >
               Place Order
             </button>
           </div>
