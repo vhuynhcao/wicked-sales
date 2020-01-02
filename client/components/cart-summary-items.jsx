@@ -15,14 +15,23 @@ class CartSummaryItems extends React.Component {
   }
 
   render() {
+    const productId = this.props.cartInfo.productId;
+    const quantity = this.props.cartInfo.quantity;
     const imgSize = {
       maxHeight: '200px',
       objectFit: 'contain'
     };
 
     const deleteModal = this.state.isOpen ? (
-      <DeleteModal deleteItem={this.props.deleteItem} productInfo={this.props.cartInfo} close={this.toggleModal} setView={this.props.setView}/>) : null;
+      <DeleteModal deleteItem={this.props.deleteItem} productInfo={this.props.cartInfo} close={this.toggleModal} setView={this.props.setView} cartLength={this.props.cartLength}/>) : null;
 
+    let removeOrDecrease;
+    if (quantity === 1) {
+      removeOrDecrease = () => { this.toggleModal(); };
+    } else {
+      removeOrDecrease = () =>
+        this.props.updateCart({ productId, operator: '-' });
+    }
     return (
       <div className="card mb-3">
         <div className="row no-gutters">
@@ -51,6 +60,31 @@ class CartSummaryItems extends React.Component {
               >
                 Remove Item
               </p>
+              <div className="d-flex">
+                <h5 className="mr-3 my-auto">Quantity: </h5>
+                <div
+                  className="d-flex btn-group btn-group-sm border border-secondary rounded quantity-box"
+                  role="group"
+                >
+                  <button
+                    className="linkPointer rounded-sm btn-light"
+                    type="button"
+                    onClick={ removeOrDecrease }
+                  >
+                    <i className="fas fa-minus" />
+                  </button>
+                  <div className="mx-3 quantity-number">{quantity}</div>
+                  <button
+                    className="linkPointer rounded-sm btn-light"
+                    type="button"
+                    onClick={() => {
+                      this.props.updateCart({ productId, operator: '+' });
+                    }}
+                  >
+                    <i className="fas fa-plus" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

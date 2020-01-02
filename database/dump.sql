@@ -27,8 +27,10 @@ CREATE TABLE `cartItems` (
   `cartId` int(11) NOT NULL,
   `productId` int(11) NOT NULL,
   `price` int(11) NOT NULL,
-  PRIMARY KEY (`cartItemId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `quantity` int(11) NOT NULL,
+  PRIMARY KEY (`cartItemId`),
+  UNIQUE KEY `productId` (`productId`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +53,7 @@ CREATE TABLE `carts` (
   `cartId` int(11) NOT NULL AUTO_INCREMENT,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`cartId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,6 +62,7 @@ CREATE TABLE `carts` (
 
 LOCK TABLES `carts` WRITE;
 /*!40000 ALTER TABLE `carts` DISABLE KEYS */;
+INSERT INTO `carts` VALUES (1,'2019-12-28 01:39:11'),(2,'2019-12-28 04:05:02'),(3,'2019-12-28 04:08:12'),(4,'2019-12-28 04:12:07'),(5,'2019-12-28 04:24:12'),(6,'2019-12-28 04:24:37'),(7,'2019-12-28 04:29:35');
 /*!40000 ALTER TABLE `carts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,7 +81,7 @@ CREATE TABLE `orders` (
   `shippingAddress` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`orderId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,6 +90,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (17,8,'Vicky','1234566422222222','1234 Lane St,\nLane, CA 92831','2019-12-24 00:07:26'),(18,9,'Vicky','1122121212121211','1224 West Lane,\nFullerton, CA 92831','2019-12-24 00:46:12'),(19,10,'Vicky','1122566827162844','1235 West Lake,\nAnaheim, CA 92842','2019-12-24 00:46:51');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,4 +131,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-20 23:59:35
+-- Dump completed on 2019-12-28  4:30:48

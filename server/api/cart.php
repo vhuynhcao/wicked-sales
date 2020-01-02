@@ -14,10 +14,8 @@ if($request['method'] === 'GET'){
                             WHERE cartId = $cartId";
     $result = [];
     $sqlQuery = mysqli_query($link, $cartInSess);
-    while($cartQuery = mysqli_fetch_assoc($sqlQuery)){
-      $result[] = $cartQuery;
-    }
-    $response['body'] = $result;
+    $cartQuery = mysqli_fetch_all($sqlQuery, MYSQLI_ASSOC);
+    $response['body'] = $cartQuery;
   }
   send($response);
 }
@@ -26,32 +24,37 @@ if($request['method'] === 'POST'){
   if(!isset($request['body']['productId']) || intval($request['body']['productId']) === 0){
     throw new ApiError("Product ID is not valid", 400);
   } else{
-    $prodId = $request['body']['productId'];
+    $productId = $request['body']['productId'];
+    $operator = $request['body']['operator'];
     $priceSql = "SELECT price
                 FROM products
-                WHERE productId = $prodId";
-    $priceResult = mysqli_fetch_assoc($link->query($priceSql));
+                WHERE productId = $productId";
+    $priceQuery = mysqli_query($link, $priceSql);
+    $priceResult = mysqli_fetch_assoc($priceQuery);
     $priceArray = $priceResult['price'];
     if(!isset($_SESSION['cart_id'])){
       $createCartSql = "INSERT INTO carts (createdAt)
                         VALUES (CURRENT_TIMESTAMP)";
       $cartItemId = mysqli_query($link, $createCartSql);
-      $cartInsertId = mysqli_insert_id($link);
+      $cartId = mysqli_insert_id($link);
     } else {
-      $cartInsertId = $_SESSION['cart_id'];
+      $cartId = $_SESSION['cart_id'];
     }
-    $cartInfoSql = "INSERT INTO `cartItems` (cartId, productId, price)
-                    VALUES ($cartInsertId, $prodId, $priceArray)";
+    $cartInfoSql = "INSERT INTO `cartItems` (cartId, productId, price, quantity)
+                    VALUES ($cartId, $productId, $priceArray, 1)
+                    ON DUPLICATE KEY
+                    UPDATE quantity = quantity $operator 1";
     $cartInfo = mysqli_query($link, $cartInfoSql);
-    $cartInfoInsert = mysqli_insert_id($link);
-    $cartInfo = "SELECT p.name, p.productId, p.price, p.shortDescription, p.image, c.cartItemId
+    $cartItemId = mysqli_insert_id($link);
+    $cartInfo = "SELECT p.name, p.productId, p.price, p.shortDescription, p.image, c.cartItemId, c.quantity
                   FROM products AS p
                   JOIN cartItems AS c
                   ON c.productId = p.productId
-                  WHERE c.cartItemId = $cartInfoInsert";
-    $cartResult = mysqli_fetch_assoc($link->query($cartInfo));
+                  WHERE c.cartItemId = $cartItemId";
+    $cartInfoQuery = mysqli_query($link, $cartInfo);
+    $cartResult = mysqli_fetch_assoc($cartInfoQuery);
     $response['body'] = $cartResult;
-    $_SESSION['cart_id'] = $cartInsertId;
+    $_SESSION['cart_id'] = $cartId;
     send($response);
   }
 }

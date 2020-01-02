@@ -11,15 +11,15 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'catalog',
+        name: 'cart',
         params: {}
       },
       cart: [],
-      isOpen: true
+      isOpen: false
     };
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
-    this.addToCart = this.addToCart.bind(this);
+    this.updateCartItems = this.updateCartItems.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.showModal = this.showModal.bind(this);
@@ -34,7 +34,7 @@ export default class App extends React.Component {
     fetch('/api/cart')
       .then(response => response.json())
       .then(cartItem =>
-        this.setState({ cart: this.state.cart.concat(cartItem) })
+        this.setState({ cart: cartItem })
       )
       .catch(error => console.error('Fetch fail: ', error));
   }
@@ -53,10 +53,10 @@ export default class App extends React.Component {
       .catch(error => console.error('Fetch fail: ', error));
   }
 
-  addToCart(product) {
+  updateCartItems({ productId, operator }) {
     const request = {
       method: 'POST',
-      body: JSON.stringify(product),
+      body: JSON.stringify({ productId, operator }),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -64,8 +64,17 @@ export default class App extends React.Component {
     fetch('/api/cart', request)
       .then(response => response.json())
       .then(product => {
-        this.setState({ cart: this.state.cart.concat(product) });
-      })
+        if (this.state.cart.some(cartItem => cartItem.productId === product.productId)) {
+          const cart = this.state.cart.filter(cartItem => {
+            return cartItem.cartItemId !== product.cartItemId;
+          });
+          cart.push(product);
+          this.setState({ cart });
+        } else {
+          this.setState({ cart: product });
+        }
+      }
+      )
       .catch(error => console.error('Add error: ', error));
   }
 
@@ -123,7 +132,7 @@ export default class App extends React.Component {
         <ProductDetails
           productParams={stateParams}
           setView={this.setView}
-          addToCart={this.addToCart}
+          addToCart={this.updateCartItems}
         />
       );
     } else if (stateName === 'cart') {
@@ -132,6 +141,7 @@ export default class App extends React.Component {
           setView={this.setView}
           viewCart={this.state.cart}
           deleteItem={this.removeCartItems}
+          updateCart={this.updateCartItems}
         />
       );
     } else if (stateName === 'checkout') {
@@ -143,15 +153,17 @@ export default class App extends React.Component {
         />
       );
     }
+
     const showModal = this.state.isOpen ? (
       <DemoModal close={this.hideModal} />
     ) : null;
+
     return (
       <>
         <div className="container">{showModal}</div>
         <Header
           text="Simply Creative"
-          cartItemCount={this.state.cart.length}
+          cartItemCount={this.state.cart}
           setView={this.setView}
         />
         <div className="container mt-4">{currentView}</div>
