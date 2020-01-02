@@ -34,7 +34,7 @@ export default class App extends React.Component {
     fetch('/api/cart')
       .then(response => response.json())
       .then(cartItem =>
-        this.setState({ cart: this.state.cart.concat(cartItem) })
+        this.setState({ cart: cartItem })
       )
       .catch(error => console.error('Fetch fail: ', error));
   }
@@ -71,7 +71,7 @@ export default class App extends React.Component {
           cart.push(product);
           this.setState({ cart });
         } else {
-          this.setState({ cart: this.state.cart.concat(product) });
+          this.setState({ cart: product });
         }
       }
       )

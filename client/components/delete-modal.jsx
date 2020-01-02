@@ -5,6 +5,14 @@ class DeleteModal extends React.Component {
   render() {
     const cartItemId = this.props.productInfo.cartItemId;
     const productId = this.props.productInfo.productId;
+    const cartLength = this.props.cartLength.length;
+
+    let changeView;
+    if (cartLength > 1) {
+      changeView = 'cart';
+    } else {
+      changeView = 'catalog';
+    }
     return (
       <div className="modalBox d-flex">
         <div className="innerModal bg-light">
@@ -20,7 +28,7 @@ class DeleteModal extends React.Component {
             className="btn btn-info mb-3 mr-2"
             onClick={() => {
               this.props.deleteItem({ cartItemId, productId });
-              this.props.setView('catalog', {});
+              this.props.setView(changeView, {});
             }}
           >
             Yes

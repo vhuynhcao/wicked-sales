@@ -23,8 +23,15 @@ class CartSummaryItems extends React.Component {
     };
 
     const deleteModal = this.state.isOpen ? (
-      <DeleteModal deleteItem={this.props.deleteItem} productInfo={this.props.cartInfo} close={this.toggleModal} setView={this.props.setView}/>) : null;
+      <DeleteModal deleteItem={this.props.deleteItem} productInfo={this.props.cartInfo} close={this.toggleModal} setView={this.props.setView} cartLength={this.props.cartLength}/>) : null;
 
+    let removeOrDecrease;
+    if (quantity === 1) {
+      removeOrDecrease = () => { this.toggleModal(); };
+    } else {
+      removeOrDecrease = () =>
+        this.props.updateCart({ productId, operator: '-' });
+    }
     return (
       <div className="card mb-3">
         <div className="row no-gutters">
@@ -62,9 +69,7 @@ class CartSummaryItems extends React.Component {
                   <button
                     className="linkPointer rounded-sm btn-light"
                     type="button"
-                    onClick={() => {
-                      this.props.updateCart({ productId, operator: '-' });
-                    }}
+                    onClick={ removeOrDecrease }
                   >
                     <i className="fas fa-minus" />
                   </button>
