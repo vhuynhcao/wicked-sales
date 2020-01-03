@@ -31,8 +31,19 @@ class CheckoutForm extends React.Component {
   }
 
   render() {
-    const { firstName, lastName, email, creditCard, shippingAddress } = this.state;
-    const isEnabled = firstName.length > 1 && lastName.length > 1 && email.length > 5 && creditCard.length > 0 && shippingAddress.length > 0;
+    const { firstName, lastName, email, address1, city, zip, state, creditCard, expMonth, expYear, cvv } = this.state;
+    const isEnabled =
+      firstName.length > 1 &&
+      lastName.length > 1 &&
+      email.length > 1 &&
+      address1.length > 1 &&
+      city.length > 1 &&
+      zip.length > 1 &&
+      state.length > 1 &&
+      creditCard.length > 1 &&
+      expMonth.length > 1 &&
+      expYear.length > 1 &&
+      cvv.length > 1;
     let totalPrice = 0;
     this.props.viewPrice.map(product => (totalPrice = totalPrice + product.price));
     return (
@@ -49,11 +60,23 @@ class CheckoutForm extends React.Component {
           <div className="row">
             <div className="col-md-6">
               <label>First name</label>
-              <input type="text" className="form-control" />
+              <input
+                type="text"
+                name="firstName"
+                value={this.state.firstName}
+                className="form-control"
+                onChange={this.handleInputChange}
+              />
             </div>
             <div className="col-md-6">
               <label>Last name</label>
-              <input type="text" className="form-control" />
+              <input
+                type="text"
+                name="lastName"
+                value={this.state.lastName}
+                className="form-control"
+                onChange={this.handleInputChange}
+              />
             </div>
           </div>
 
@@ -62,8 +85,11 @@ class CheckoutForm extends React.Component {
               <label>Email</label>
               <input
                 type="text"
+                name="email"
+                value={this.state.email}
                 className="form-control"
                 placeholder="you@example.com"
+                onChange={this.handleInputChange}
               />
             </div>
           </div>
@@ -73,16 +99,22 @@ class CheckoutForm extends React.Component {
               <label>Address Line 1</label>
               <input
                 type="text"
+                name="address1"
+                value={this.state.address1}
                 className="form-control"
                 placeholder="123 ABC St"
+                onChange={this.handleInputChange}
               />
             </div>
             <div className="col-md-6">
               <label>Address Line 2</label>
               <input
                 type="text"
+                name="address2"
+                value={this.state.address2}
                 className="form-control"
                 placeholder="Apartment, suite, unit, etc. (Optional)"
+                onChange={this.handleInputChange}
               />
             </div>
           </div>
@@ -90,66 +122,83 @@ class CheckoutForm extends React.Component {
           <div className="row mt-3">
             <div className="col-md-4">
               <label>City</label>
-              <input type="text" className="form-control" />
+              <input
+                type="text"
+                name="city"
+                value={this.state.city}
+                className="form-control"
+                onChange={this.handleInputChange}
+              />
             </div>
             <div className="col-md-4">
               <label>Zip Code</label>
-              <input type="text" className="form-control" />
+              <input
+                type="text"
+                name="zip"
+                value={this.state.zip}
+                className="form-control"
+                onChange={this.handleInputChange}
+              />
             </div>
             <div className="col-md-4">
               <label>State</label>
-              <select className="form-control">
+              <select
+                name="state"
+                value={this.state.state}
+                className="form-control"
+                onChange={this.handleInputChange}
+              >
                 <option>Choose...</option>
-                <option>AL</option>
-                <option>AK</option>
-                <option>AZ</option>
-                <option>AR</option>
-                <option>CA</option>
-                <option>CO</option>
-                <option>CT</option>
-                <option>DE</option>
-                <option>FL</option>
-                <option>GA</option>
-                <option>HI</option>
-                <option>ID</option>
-                <option>IL</option>
-                <option>IN</option>
-                <option>IA</option>
-                <option>KS</option>
-                <option>KY</option>
-                <option>LA</option>
-                <option>ME</option>
-                <option>MD</option>
-                <option>MA</option>
-                <option>MI</option>
-                <option>MN</option>
-                <option>MS</option>
-                <option>MO</option>
-                <option>MT</option>
-                <option>NE</option>
-                <option>NV</option>
-                <option>NH</option>
-                <option>NJ</option>
-                <option>NM</option>
-                <option>NY</option>
-                <option>NC</option>
-                <option>ND</option>
-                <option>OH</option>
-                <option>OK</option>
-                <option>OR</option>
-                <option>PA</option>
-                <option>RI</option>
-                <option>SC</option>
-                <option>SD</option>
-                <option>TN</option>
-                <option>TX</option>
-                <option>UT</option>
-                <option>VT</option>
-                <option>VA</option>
-                <option>WA</option>
-                <option>WV</option>
-                <option>WI</option>
-                <option>WY</option>
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AZ">AZ</option>
+                <option value="AR">AR</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DE">DE</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="IA">IA</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="ME">ME</option>
+                <option value="MD">MD</option>
+                <option value="MA">MA</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MS">MS</option>
+                <option value="MO">MO</option>
+                <option value="MT">MT</option>
+                <option value="NE">NE</option>
+                <option value="NV">NV</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>
+                <option value="NY">NY</option>
+                <option value="NC">NC</option>
+                <option value="ND">ND</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VT">VT</option>
+                <option value="VA">VA</option>
+                <option value="WA">WA</option>
+                <option value="WV">WV</option>
+                <option value="WI">WI</option>
+                <option value="WY">WY</option>
               </select>
             </div>
           </div>
@@ -159,47 +208,66 @@ class CheckoutForm extends React.Component {
               <label>Credit card number</label>
               <input
                 type="text"
+                name="creditCard"
+                value={this.state.creditCard}
                 className="form-control"
                 placeholder="0000 0000 0000 0000"
                 minLength="16"
                 maxLength="16"
+                onChange={this.handleInputChange}
               />
             </div>
             <div className="col-md-3">
               <label>Expiration date</label>
               <div className="d-flex">
-                <select className="form-control col mr-2">
-                  <option>MM</option>
-                  <option>01</option>
-                  <option>02</option>
-                  <option>03</option>
-                  <option>04</option>
-                  <option>05</option>
-                  <option>06</option>
-                  <option>07</option>
-                  <option>08</option>
-                  <option>09</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
+                <select
+                  name="expMonth"
+                  value={this.state.expMonth}
+                  className="form-control col mr-2"
+                  onChange={this.handleInputChange}
+                >
+                  <option>Month</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
                 </select>
-                <select className="form-control col">
-                  <option>YY</option>
-                  <option>2020</option>
-                  <option>2021</option>
-                  <option>2022</option>
-                  <option>2023</option>
-                  <option>2024</option>
-                  <option>2025</option>
-                  <option>2026</option>
-                  <option>2027</option>
-                  <option>2028</option>
+                <select
+                  name="expYear"
+                  value={this.state.expYear}
+                  className="form-control col"
+                  onChange={this.handleInputChange}
+                >
+                  <option>Year</option>
+                  <option value="2020">2020</option>
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
+                  <option value="2026">2026</option>
+                  <option value="2027">2027</option>
+                  <option value="2028">2028</option>
                 </select>
               </div>
             </div>
             <div className="col-md-3">
               <label>CVV</label>
-              <input type="text" className="form-control" />
+              <input
+                type="text"
+                name="cvv"
+                value={this.state.cvv}
+                className="form-control"
+                onChange={this.handleInputChange}
+              />
             </div>
           </div>
 

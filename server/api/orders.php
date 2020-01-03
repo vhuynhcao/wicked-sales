@@ -19,14 +19,8 @@ if($request['method'] === 'POST'){
     $expMonth = $request['body']['expMonth'];
     $expYear = $request['body']['expYear'];
     $cvv = $request['body']['cvv'];
-    if (!isset($name)){
-      throw new ApiError('Full name is needed', 400);
-    }
-    if (!isset($creditCard)){
-      throw new ApiError('Credit card information is needed', 400);
-    }
-    if (!isset($shippingAddress)){
-      throw new ApiError('Shipping information is needed', 400);
+    if (!isset($firstName) || !isset($lastName) || !isset($email) || !isset($address1) || !isset($address2) || !isset($city) || !isset($zip) || !isset($state) || !isset($creditCard) || !isset($expMonth) || !isset($expYear) || !isset($cvv)){
+      throw new ApiError('Information is needed', 400);
     }
     $insertOrder = "INSERT INTO orders (cartId, firstName, lastName, email, address1, address2, city, zip, state, creditCard, expMonth, expYear, cvv)
                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
