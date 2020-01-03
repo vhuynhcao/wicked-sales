@@ -15,7 +15,20 @@ class CheckoutForm extends React.Component {
       creditCard: '',
       expMonth: '',
       expYear: '',
-      cvv: ''
+      cvv: '',
+      validate: {
+        firstName: true,
+        lastName: true,
+        email: true,
+        address1: true,
+        city: true,
+        zip: true,
+        state: true,
+        creditCard: true,
+        expMonth: true,
+        expYear: true,
+        cvv: true
+      }
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputSubmit = this.handleInputSubmit.bind(this);
@@ -23,6 +36,7 @@ class CheckoutForm extends React.Component {
 
   handleInputChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+    this.validateForm();
   }
 
   handleInputSubmit(event) {
@@ -30,22 +44,87 @@ class CheckoutForm extends React.Component {
     this.props.placeOrder(this.state);
   }
 
+  validateForm() {
+    const validate = {
+      firstName: true,
+      lastName: true,
+      email: true,
+      address1: true,
+      city: true,
+      zip: true,
+      state: true,
+      creditCard: true,
+      expMonth: true,
+      expYear: true,
+      cvv: true
+    };
+    const emailRegex = RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+    if (this.state.firstName.length < 2) {
+      validate.firstName = false;
+    }
+
+    if (this.state.lastName.length < 2) {
+      validate.lastName = false;
+    }
+
+    if (this.state.email.length < 6) {
+      validate.email = false;
+    }
+
+    if (!emailRegex.test(this.state.email)) {
+      validate.email = false;
+    }
+
+    if (this.state.address1.length < 6) {
+      validate.address1 = false;
+    }
+
+    if (this.state.city.length < 3) {
+      validate.city = false;
+    }
+
+    if (this.state.zip.length < 5) {
+      validate.zip = false;
+    }
+
+    if (this.state.state === '') {
+      validate.state = false;
+    }
+
+    if (this.state.creditCard.length < 15) {
+      validate.creditCard = false;
+    }
+
+    if (this.state.expMonth === '') {
+      validate.expMonth = false;
+    }
+
+    if (this.state.expYear === '') {
+      validate.expYear = false;
+    }
+
+    if (this.state.cvv.length < 2) {
+      validate.cvv = false;
+    }
+
+    this.setState({ validate });
+  }
+
   render() {
-    const { firstName, lastName, email, address1, city, zip, state, creditCard, expMonth, expYear, cvv } = this.state;
-    const isEnabled =
-      firstName.length > 1 &&
-      lastName.length > 1 &&
-      email.length > 1 &&
-      address1.length > 1 &&
-      city.length > 1 &&
-      zip.length > 1 &&
-      state.length > 1 &&
-      creditCard.length > 1 &&
-      expMonth.length > 1 &&
-      expYear.length > 1 &&
-      cvv.length > 1;
     let totalPrice = 0;
     this.props.viewPrice.map(product => (totalPrice = totalPrice + product.price));
+    const checkFirstName = this.state.validate.firstName ? null : 'is-invalid';
+    const checkLastName = this.state.validate.lastName ? null : 'is-invalid';
+    const checkEmail = this.state.validate.email ? null : 'is-invalid';
+    const checkAddress = this.state.validate.address1 ? null : 'is-invalid';
+    const checkCity = this.state.validate.city ? null : 'is-invalid';
+    const checkZip = this.state.validate.zip ? null : 'is-invalid';
+    const checkState = this.state.validate.state ? null : 'is-invalid';
+    const checkCard = this.state.validate.creditCard ? null : 'is-invalid';
+    const checkMonth = this.state.validate.expMonth ? null : 'is-invalid';
+    const checkYear = this.state.validate.expYear ? null : 'is-invalid';
+    const checkCvv = this.state.validate.cvv ? null : 'is-invalid';
     return (
       <div className="container">
         <h1>Checkout</h1>
@@ -59,52 +138,80 @@ class CheckoutForm extends React.Component {
 
           <div className="row">
             <div className="col-md-6">
-              <label>First name</label>
+              <label>
+                First name<span className="text-danger">*</span>
+              </label>
               <input
                 type="text"
                 name="firstName"
                 value={this.state.firstName}
-                className="form-control"
+                className={`form-control ${checkFirstName}`}
                 onChange={this.handleInputChange}
+                maxLength="32"
+                required
               />
+              <div className="invalid-feedback">
+                Name must be longer than 2 characters
+              </div>
             </div>
             <div className="col-md-6">
-              <label>Last name</label>
+              <label>
+                Last name<span className="text-danger">*</span>
+              </label>
               <input
                 type="text"
                 name="lastName"
                 value={this.state.lastName}
-                className="form-control"
+                className={`form-control ${checkLastName}`}
                 onChange={this.handleInputChange}
+                maxLength="32"
+                required
               />
+              <div className="invalid-feedback">
+                Name must be longer than 2 characters
+              </div>
             </div>
           </div>
 
           <div className="row mt-3">
             <div className="col">
-              <label>Email</label>
+              <label>
+                Email<span className="text-danger">*</span>
+              </label>
               <input
                 type="text"
                 name="email"
                 value={this.state.email}
-                className="form-control"
+                className={`form-control ${checkEmail}`}
                 placeholder="you@example.com"
                 onChange={this.handleInputChange}
+                maxLength="254"
+                required
               />
+              <div className="invalid-feedback">
+                Please enter a valid email address
+              </div>
             </div>
           </div>
 
           <div className="row mt-3">
             <div className="col-md-6">
-              <label>Address Line 1</label>
+              <label>
+                Address Line 1<span className="text-danger">*</span>
+              </label>
               <input
                 type="text"
                 name="address1"
                 value={this.state.address1}
-                className="form-control"
+                className={`form-control ${checkAddress}`}
                 placeholder="123 ABC St"
                 onChange={this.handleInputChange}
+                maxLength="42"
+                required
               />
+              <div className="invalid-feedback">
+                Address must be longer than 6 characters
+              </div>
             </div>
             <div className="col-md-6">
               <label>Address Line 2</label>
@@ -115,38 +222,55 @@ class CheckoutForm extends React.Component {
                 className="form-control"
                 placeholder="Apartment, suite, unit, etc. (Optional)"
                 onChange={this.handleInputChange}
+                maxLength="42"
               />
             </div>
           </div>
 
           <div className="row mt-3">
             <div className="col-md-4">
-              <label>City</label>
+              <label>
+                City<span className="text-danger">*</span>
+              </label>
               <input
                 type="text"
                 name="city"
                 value={this.state.city}
-                className="form-control"
+                className={`form-control ${checkCity}`}
                 onChange={this.handleInputChange}
+                maxLength="50"
+                required
               />
+              <div className="invalid-feedback">
+                City must be longer than 3 characters
+              </div>
             </div>
             <div className="col-md-4">
-              <label>Zip Code</label>
+              <label>
+                Zip Code<span className="text-danger">*</span>
+              </label>
               <input
                 type="text"
                 name="zip"
                 value={this.state.zip}
-                className="form-control"
+                className={`form-control ${checkZip}`}
                 onChange={this.handleInputChange}
+                maxLength="5"
+                required
               />
+              <div className="invalid-feedback">Valid zip code is required</div>
             </div>
             <div className="col-md-4">
-              <label>State</label>
+              <label>
+                State<span className="text-danger">*</span>
+              </label>
               <select
                 name="state"
                 value={this.state.state}
-                className="form-control"
+                className={`form-control ${checkState}`}
                 onChange={this.handleInputChange}
+                maxLength="2"
+                required
               >
                 <option>Choose...</option>
                 <option value="AL">AL</option>
@@ -200,31 +324,41 @@ class CheckoutForm extends React.Component {
                 <option value="WI">WI</option>
                 <option value="WY">WY</option>
               </select>
+              <div className="invalid-feedback">Select a state</div>
             </div>
           </div>
 
           <div className="row mt-3">
             <div className="col-md-6">
-              <label>Credit card number</label>
+              <label>
+                Credit card number<span className="text-danger">*</span>
+              </label>
               <input
                 type="text"
                 name="creditCard"
                 value={this.state.creditCard}
-                className="form-control"
+                className={`form-control ${checkCard}`}
                 placeholder="0000 0000 0000 0000"
-                minLength="16"
                 maxLength="16"
                 onChange={this.handleInputChange}
+                required
               />
+              <div className="invalid-feedback">
+                Credit card number must be 16 characters without spaces
+              </div>
             </div>
             <div className="col-md-3">
-              <label>Expiration date</label>
+              <label>
+                Expiration date<span className="text-danger">*</span>
+              </label>
               <div className="d-flex">
                 <select
                   name="expMonth"
                   value={this.state.expMonth}
-                  className="form-control col mr-2"
+                  className={`form-control col mr-2 ${checkMonth}`}
                   onChange={this.handleInputChange}
+                  maxLength="2"
+                  required
                 >
                   <option>Month</option>
                   <option value="01">01</option>
@@ -243,8 +377,10 @@ class CheckoutForm extends React.Component {
                 <select
                   name="expYear"
                   value={this.state.expYear}
-                  className="form-control col"
+                  className={`form-control col ${checkYear}`}
                   onChange={this.handleInputChange}
+                  minLength="4"
+                  maxLength="4"
                 >
                   <option>Year</option>
                   <option value="2020">2020</option>
@@ -260,14 +396,21 @@ class CheckoutForm extends React.Component {
               </div>
             </div>
             <div className="col-md-3">
-              <label>CVV</label>
+              <label>
+                CVV<span className="text-danger">*</span>
+              </label>
               <input
                 type="text"
                 name="cvv"
                 value={this.state.cvv}
-                className="form-control"
+                className={`form-control ${checkCvv}`}
                 onChange={this.handleInputChange}
+                maxLength="4"
+                required
               />
+              <div className="invalid-feedback">
+                Valid CVV number is required
+              </div>
             </div>
           </div>
 
@@ -279,11 +422,7 @@ class CheckoutForm extends React.Component {
               <i className="fas fa-angle-double-left mr-2" />
               Continue Shopping
             </div>
-            <button
-              disabled={!isEnabled}
-              type="submit"
-              className="linkPointer btn btn-primary"
-            >
+            <button type="submit" className="linkPointer btn btn-primary">
               Place Order
             </button>
           </div>
