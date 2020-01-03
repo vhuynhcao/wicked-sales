@@ -7,8 +7,15 @@ class CheckoutForm extends React.Component {
       firstName: '',
       lastName: '',
       email: '',
+      address1: '',
+      address2: '',
+      city: '',
+      zip: '',
+      state: '',
       creditCard: '',
-      shippingAddress: ''
+      expMonth: '',
+      expYear: '',
+      cvv: ''
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputSubmit = this.handleInputSubmit.bind(this);
@@ -53,14 +60,22 @@ class CheckoutForm extends React.Component {
           <div className="row mt-3">
             <div className="col">
               <label>Email</label>
-              <input type="text" className="form-control" />
+              <input
+                type="text"
+                className="form-control"
+                placeholder="you@example.com"
+              />
             </div>
           </div>
 
           <div className="row mt-3">
             <div className="col-md-6">
               <label>Address Line 1</label>
-              <input type="text" className="form-control" />
+              <input
+                type="text"
+                className="form-control"
+                placeholder="123 ABC St"
+              />
             </div>
             <div className="col-md-6">
               <label>Address Line 2</label>
@@ -73,47 +88,116 @@ class CheckoutForm extends React.Component {
           </div>
 
           <div className="row mt-3">
-            <div className="col-md-3">
-              <label>Country</label>
-              <select className="form-control">
-                <option>Choose...</option>
-                <option>USA</option>
-              </select>
-            </div>
-            <div className="col-md-3">
+            <div className="col-md-4">
               <label>City</label>
               <input type="text" className="form-control" />
             </div>
-            <div className="col-md-3">
+            <div className="col-md-4">
               <label>Zip Code</label>
               <input type="text" className="form-control" />
             </div>
-            <div className="col-md-3">
+            <div className="col-md-4">
               <label>State</label>
               <select className="form-control">
                 <option>Choose...</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+                <option>AL</option>
+                <option>AK</option>
+                <option>AZ</option>
+                <option>AR</option>
+                <option>CA</option>
+                <option>CO</option>
+                <option>CT</option>
+                <option>DE</option>
+                <option>FL</option>
+                <option>GA</option>
+                <option>HI</option>
+                <option>ID</option>
+                <option>IL</option>
+                <option>IN</option>
+                <option>IA</option>
+                <option>KS</option>
+                <option>KY</option>
+                <option>LA</option>
+                <option>ME</option>
+                <option>MD</option>
+                <option>MA</option>
+                <option>MI</option>
+                <option>MN</option>
+                <option>MS</option>
+                <option>MO</option>
+                <option>MT</option>
+                <option>NE</option>
+                <option>NV</option>
+                <option>NH</option>
+                <option>NJ</option>
+                <option>NM</option>
+                <option>NY</option>
+                <option>NC</option>
+                <option>ND</option>
+                <option>OH</option>
+                <option>OK</option>
+                <option>OR</option>
+                <option>PA</option>
+                <option>RI</option>
+                <option>SC</option>
+                <option>SD</option>
+                <option>TN</option>
+                <option>TX</option>
+                <option>UT</option>
+                <option>VT</option>
+                <option>VA</option>
+                <option>WA</option>
+                <option>WV</option>
+                <option>WI</option>
+                <option>WY</option>
               </select>
             </div>
           </div>
 
           <div className="row mt-3">
-            <div className="col-md-4">
+            <div className="col-md-6">
               <label>Credit card number</label>
               <input
                 type="text"
                 className="form-control"
                 placeholder="0000 0000 0000 0000"
+                minLength="16"
+                maxLength="16"
               />
             </div>
-            <div className="col-md-4">
+            <div className="col-md-3">
               <label>Expiration date</label>
-              <input type="text" className="form-control" placeholder="MM/YY" />
+              <div className="d-flex">
+                <select className="form-control col mr-2">
+                  <option>MM</option>
+                  <option>01</option>
+                  <option>02</option>
+                  <option>03</option>
+                  <option>04</option>
+                  <option>05</option>
+                  <option>06</option>
+                  <option>07</option>
+                  <option>08</option>
+                  <option>09</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                </select>
+                <select className="form-control col">
+                  <option>YY</option>
+                  <option>2020</option>
+                  <option>2021</option>
+                  <option>2022</option>
+                  <option>2023</option>
+                  <option>2024</option>
+                  <option>2025</option>
+                  <option>2026</option>
+                  <option>2027</option>
+                  <option>2028</option>
+                </select>
+              </div>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-3">
               <label>CVV</label>
               <input type="text" className="form-control" />
             </div>
