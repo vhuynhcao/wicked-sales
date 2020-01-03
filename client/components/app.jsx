@@ -73,7 +73,7 @@ export default class App extends React.Component {
           cart.push(product);
           this.setState({ cart });
         } else {
-          this.setState({ cart: product });
+          this.setState({ cart: this.state.cart.concat(product) });
         }
       })
       .catch(error => console.error('Add error: ', error));
