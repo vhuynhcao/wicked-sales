@@ -363,12 +363,12 @@ class CheckoutForm extends React.Component {
                 Credit card number<span className="text-danger">*</span>
               </label>
               <input
-                type="text"
+                type="tel"
                 name="creditCard"
                 value={this.state.creditCard}
                 className={`form-control ${checkCard}`}
                 placeholder="0000 0000 0000 0000"
-                maxLength="16"
+                maxLength="20"
                 onChange={this.handleInputChange}
                 required
               />
