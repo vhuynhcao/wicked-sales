@@ -58,13 +58,26 @@ class CheckoutForm extends React.Component {
       expYear: true,
       cvv: true
     };
+
     const emailRegex = RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    const zipRegex = RegExp(/^\d{1,5}$/);
+    const alphaRegex = RegExp(/^[A-Za-z ]+$/);
+    const cardRegex = RegExp(/^[0-9 ]*$/);
+    const cvvRegex = RegExp(/^[0-9]{3,4}$/);
 
     if (this.state.firstName.length < 2) {
       validate.firstName = false;
     }
 
+    if (!alphaRegex.test(this.state.firstName)) {
+      validate.firstName = false;
+    }
+
     if (this.state.lastName.length < 2) {
+      validate.lastName = false;
+    }
+
+    if (!alphaRegex.test(this.state.lastName)) {
       validate.lastName = false;
     }
 
@@ -84,7 +97,15 @@ class CheckoutForm extends React.Component {
       validate.city = false;
     }
 
-    if (this.state.zip.length < 5) {
+    if (!alphaRegex.test(this.state.city)) {
+      validate.city = false;
+    }
+
+    if (this.state.zip.length < 4) {
+      validate.zip = false;
+    }
+
+    if (!zipRegex.test(this.state.zip)) {
       validate.zip = false;
     }
 
@@ -93,6 +114,10 @@ class CheckoutForm extends React.Component {
     }
 
     if (this.state.creditCard.length < 15) {
+      validate.creditCard = false;
+    }
+
+    if (!cardRegex.test(this.state.creditCard)) {
       validate.creditCard = false;
     }
 
@@ -105,6 +130,10 @@ class CheckoutForm extends React.Component {
     }
 
     if (this.state.cvv.length < 2) {
+      validate.cvv = false;
+    }
+
+    if (!cvvRegex.test(this.state.cvv)) {
       validate.cvv = false;
     }
 
@@ -151,7 +180,7 @@ class CheckoutForm extends React.Component {
                 required
               />
               <div className="invalid-feedback">
-                Name must be longer than 2 characters
+                Name must be longer than 2 characters and alphabet characters
               </div>
             </div>
             <div className="col-md-6">
@@ -168,7 +197,7 @@ class CheckoutForm extends React.Component {
                 required
               />
               <div className="invalid-feedback">
-                Name must be longer than 2 characters
+                Name must be longer than 2 characters and alphabet characters
               </div>
             </div>
           </div>
@@ -242,7 +271,7 @@ class CheckoutForm extends React.Component {
                 required
               />
               <div className="invalid-feedback">
-                City must be longer than 3 characters
+                Please enter a valid city
               </div>
             </div>
             <div className="col-md-4">
@@ -344,7 +373,7 @@ class CheckoutForm extends React.Component {
                 required
               />
               <div className="invalid-feedback">
-                Credit card number must be 16 characters without spaces
+                Please enter a valid credit card number
               </div>
             </div>
             <div className="col-md-3">
@@ -409,7 +438,7 @@ class CheckoutForm extends React.Component {
                 required
               />
               <div className="invalid-feedback">
-                Valid CVV number is required
+                Please enter a valid CVV number
               </div>
             </div>
           </div>
