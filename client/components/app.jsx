@@ -11,7 +11,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'cart',
+        name: 'checkout',
         params: {}
       },
       cart: [],
@@ -33,9 +33,7 @@ export default class App extends React.Component {
   getCartItems() {
     fetch('/api/cart')
       .then(response => response.json())
-      .then(cartItem =>
-        this.setState({ cart: cartItem })
-      )
+      .then(cartItem => this.setState({ cart: cartItem }))
       .catch(error => console.error('Fetch fail: ', error));
   }
 
@@ -64,17 +62,20 @@ export default class App extends React.Component {
     fetch('/api/cart', request)
       .then(response => response.json())
       .then(product => {
-        if (this.state.cart.some(cartItem => cartItem.productId === product.productId)) {
+        if (
+          this.state.cart.some(
+            cartItem => cartItem.productId === product.productId
+          )
+        ) {
           const cart = this.state.cart.filter(cartItem => {
             return cartItem.cartItemId !== product.cartItemId;
           });
           cart.push(product);
           this.setState({ cart });
         } else {
-          this.setState({ cart: product });
+          this.setState({ cart: this.state.cart.concat(product) });
         }
-      }
-      )
+      })
       .catch(error => console.error('Add error: ', error));
   }
 
@@ -84,13 +85,33 @@ export default class App extends React.Component {
     });
   }
 
-  placeOrder({ name, creditCard, shippingAddress }) {
+  placeOrder({
+    fullName,
+    email,
+    address1,
+    address2,
+    city,
+    zip,
+    state,
+    creditCard,
+    expMonth,
+    expYear,
+    cvv
+  }) {
     const request = {
       method: 'POST',
       body: JSON.stringify({
-        name,
+        fullName,
+        email,
+        address1,
+        address2,
+        city,
+        zip,
+        state,
         creditCard,
-        shippingAddress
+        expMonth,
+        expYear,
+        cvv
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -150,6 +171,7 @@ export default class App extends React.Component {
           setView={this.setView}
           placeOrder={this.placeOrder}
           viewPrice={this.state.cart}
+          cartQuantity={this.state.cart}
         />
       );
     }
