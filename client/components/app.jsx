@@ -171,6 +171,7 @@ export default class App extends React.Component {
           setView={this.setView}
           placeOrder={this.placeOrder}
           viewPrice={this.state.cart}
+          cartQuantity={this.state.cart}
         />
       );
     }

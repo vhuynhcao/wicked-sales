@@ -1,4 +1,5 @@
 import React from 'react';
+import MiniCartList from './minicart';
 
 class CheckoutForm extends React.Component {
   constructor(props) {
@@ -130,8 +131,23 @@ class CheckoutForm extends React.Component {
   }
 
   render() {
+
     let totalPrice = 0;
     this.props.viewPrice.map(product => (totalPrice = totalPrice + product.price));
+
+    const miniCart = this.props.cartQuantity.map(item => {
+      return (
+        <MiniCartList
+          key={item.productId}
+          id={item.productId}
+          item={item}
+          name={item.name}
+          price={item.price}
+          quantity={item.quantity}
+        />
+      );
+    });
+
     const checkFullName = this.state.validate.fullName ? null : 'is-invalid';
     const checkEmail = this.state.validate.email ? null : 'is-invalid';
     const checkAddress = this.state.validate.address1 ? null : 'is-invalid';
@@ -142,287 +158,308 @@ class CheckoutForm extends React.Component {
     const checkMonth = this.state.validate.expMonth ? null : 'is-invalid';
     const checkYear = this.state.validate.expYear ? null : 'is-invalid';
     const checkCvv = this.state.validate.cvv ? null : 'is-invalid';
+
     return (
       <div className="container">
         <h1>Checkout</h1>
-        <h4 className="text-muted">
-          Order Total: {'$' + (totalPrice / 100).toFixed(2)}
-        </h4>
-        <form className="mt-4" onSubmit={this.handleInputSubmit}>
-          <p className="warning">
-            Please do not use real personal information in the form.
-          </p>
+        <p className="warning">
+          Please do not use real personal information in the form.
+        </p>
+        <div className="row">
 
-          <div className="row">
-            <div className="col-md-6">
-              <label>
-                Full name<span className="text-danger">*</span>
-              </label>
-              <input
-                type="text"
-                name="fullName"
-                value={this.state.fullName}
-                className={`form-control ${checkFullName}`}
-                onChange={this.handleInputChange}
-                maxLength="65"
-                required
-              />
-              <div className="invalid-feedback">
-                Name must be longer than 5 characters and alphabet characters
-              </div>
-            </div>
-            <div className="col-md-6">
-              <label>
-                Email<span className="text-danger">*</span>
-              </label>
-              <input
-                type="text"
-                name="email"
-                value={this.state.email}
-                className={`form-control ${checkEmail}`}
-                placeholder="you@example.com"
-                onChange={this.handleInputChange}
-                maxLength="254"
-                required
-              />
-              <div className="invalid-feedback">
-                Please enter a valid email address
-              </div>
-            </div>
+          <div className="col-md-4 order-md-2">
+            <h4 className="d-flex justify-content-between align-items-center">
+              <p className="text-muted">Your cart summary</p>
+            </h4>
+            <ul className="list-group mb-5">
+              {miniCart}
+              <li className="list-group-item d-flex justify-content-between">
+                <span>Order Total:</span>
+                <strong>{'$' + (totalPrice / 100).toFixed(2)}</strong>
+              </li>
+            </ul>
           </div>
 
-          <div className="row mt-3">
-            <div className="col-md-6">
-              <label>
-                Address Line 1<span className="text-danger">*</span>
-              </label>
-              <input
-                type="text"
-                name="address1"
-                value={this.state.address1}
-                className={`form-control ${checkAddress}`}
-                placeholder="123 ABC St"
-                onChange={this.handleInputChange}
-                maxLength="42"
-                required
-              />
-              <div className="invalid-feedback">
-                Address must be longer than 6 characters
+          <form className="col-md-8" onSubmit={this.handleInputSubmit}>
+            <div className="row">
+              <div className="col-md-6">
+                <label>
+                  Full name<span className="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="fullName"
+                  placeholder="Riley Doe"
+                  value={this.state.fullName}
+                  className={`form-control ${checkFullName}`}
+                  onChange={this.handleInputChange}
+                  maxLength="65"
+                  required
+                />
+                <div className="invalid-feedback">
+                  Name must be longer than 5 characters and alphabet characters
+                </div>
+              </div>
+              <div className="col-md-6">
+                <label>
+                  Email<span className="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="email"
+                  value={this.state.email}
+                  className={`form-control ${checkEmail}`}
+                  placeholder="you@example.com"
+                  onChange={this.handleInputChange}
+                  maxLength="254"
+                  required
+                />
+                <div className="invalid-feedback">
+                  Please enter a valid email address
+                </div>
               </div>
             </div>
-            <div className="col-md-6">
-              <label>Address Line 2</label>
-              <input
-                type="text"
-                name="address2"
-                value={this.state.address2}
-                className="form-control"
-                placeholder="Apartment, suite, unit, etc. (Optional)"
-                onChange={this.handleInputChange}
-                maxLength="42"
-              />
-            </div>
-          </div>
 
-          <div className="row mt-3">
-            <div className="col-md-4">
-              <label>
-                City<span className="text-danger">*</span>
-              </label>
-              <input
-                type="text"
-                name="city"
-                value={this.state.city}
-                className={`form-control ${checkCity}`}
-                onChange={this.handleInputChange}
-                maxLength="50"
-                required
-              />
-              <div className="invalid-feedback">Please enter a valid city</div>
-            </div>
-            <div className="col-md-4">
-              <label>
-                Zip Code<span className="text-danger">*</span>
-              </label>
-              <input
-                type="text"
-                name="zip"
-                value={this.state.zip}
-                className={`form-control ${checkZip}`}
-                onChange={this.handleInputChange}
-                maxLength="5"
-                required
-              />
-              <div className="invalid-feedback">Valid zip code is required</div>
-            </div>
-            <div className="col-md-4">
-              <label>
-                State<span className="text-danger">*</span>
-              </label>
-              <select
-                name="state"
-                value={this.state.state}
-                className={`form-control ${checkState}`}
-                onChange={this.handleInputChange}
-                maxLength="2"
-                required
-              >
-                <option value="">Choose...</option>
-                <option value="AL">AL</option>
-                <option value="AK">AK</option>
-                <option value="AZ">AZ</option>
-                <option value="AR">AR</option>
-                <option value="CA">CA</option>
-                <option value="CO">CO</option>
-                <option value="CT">CT</option>
-                <option value="DE">DE</option>
-                <option value="FL">FL</option>
-                <option value="GA">GA</option>
-                <option value="HI">HI</option>
-                <option value="ID">ID</option>
-                <option value="IL">IL</option>
-                <option value="IN">IN</option>
-                <option value="IA">IA</option>
-                <option value="KS">KS</option>
-                <option value="KY">KY</option>
-                <option value="LA">LA</option>
-                <option value="ME">ME</option>
-                <option value="MD">MD</option>
-                <option value="MA">MA</option>
-                <option value="MI">MI</option>
-                <option value="MN">MN</option>
-                <option value="MS">MS</option>
-                <option value="MO">MO</option>
-                <option value="MT">MT</option>
-                <option value="NE">NE</option>
-                <option value="NV">NV</option>
-                <option value="NH">NH</option>
-                <option value="NJ">NJ</option>
-                <option value="NM">NM</option>
-                <option value="NY">NY</option>
-                <option value="NC">NC</option>
-                <option value="ND">ND</option>
-                <option value="OH">OH</option>
-                <option value="OK">OK</option>
-                <option value="OR">OR</option>
-                <option value="PA">PA</option>
-                <option value="RI">RI</option>
-                <option value="SC">SC</option>
-                <option value="SD">SD</option>
-                <option value="TN">TN</option>
-                <option value="TX">TX</option>
-                <option value="UT">UT</option>
-                <option value="VT">VT</option>
-                <option value="VA">VA</option>
-                <option value="WA">WA</option>
-                <option value="WV">WV</option>
-                <option value="WI">WI</option>
-                <option value="WY">WY</option>
-              </select>
-              <div className="invalid-feedback">Select a state</div>
-            </div>
-          </div>
-
-          <div className="row mt-3">
-            <div className="col-md-6">
-              <label>
-                Credit card number<span className="text-danger">*</span>
-              </label>
-              <input
-                type="text"
-                name="creditCard"
-                value={this.state.creditCard}
-                className={`form-control ${checkCard}`}
-                placeholder="0000 0000 0000 0000"
-                maxLength="16"
-                onChange={this.handleInputChange}
-                required
-              />
-              <div className="invalid-feedback">
-                Please enter a valid credit card number
+            <div className="row mt-3">
+              <div className="col-md-6">
+                <label>
+                  Address Line 1<span className="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="address1"
+                  value={this.state.address1}
+                  className={`form-control ${checkAddress}`}
+                  placeholder="123 ABC St"
+                  onChange={this.handleInputChange}
+                  maxLength="42"
+                  required
+                />
+                <div className="invalid-feedback">
+                  Address must be longer than 6 characters
+                </div>
+              </div>
+              <div className="col-md-6">
+                <label>Address Line 2</label>
+                <input
+                  type="text"
+                  name="address2"
+                  value={this.state.address2}
+                  className="form-control"
+                  placeholder="Apartment, suite, etc. (Optional)"
+                  onChange={this.handleInputChange}
+                  maxLength="42"
+                />
               </div>
             </div>
-            <div className="col-md-3">
-              <label>
-                Expiration date<span className="text-danger">*</span>
-              </label>
-              <div className="d-flex">
+
+            <div className="row mt-3">
+              <div className="col-md-4">
+                <label>
+                  City<span className="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="city"
+                  placeholder="Some City"
+                  value={this.state.city}
+                  className={`form-control ${checkCity}`}
+                  onChange={this.handleInputChange}
+                  maxLength="50"
+                  required
+                />
+                <div className="invalid-feedback">
+                  Please enter a valid city
+                </div>
+              </div>
+              <div className="col-md-4">
+                <label>
+                  Zip Code<span className="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="zip"
+                  placeholder="XXXXX"
+                  value={this.state.zip}
+                  className={`form-control ${checkZip}`}
+                  onChange={this.handleInputChange}
+                  maxLength="5"
+                  required
+                />
+                <div className="invalid-feedback">
+                  Valid zip code is required
+                </div>
+              </div>
+              <div className="col-md-4">
+                <label>
+                  State<span className="text-danger">*</span>
+                </label>
                 <select
-                  name="expMonth"
-                  value={this.state.expMonth}
-                  className={`form-control col mr-2 ${checkMonth}`}
+                  name="state"
+                  value={this.state.state}
+                  className={`form-control ${checkState}`}
                   onChange={this.handleInputChange}
                   maxLength="2"
                   required
                 >
-                  <option value="">Month</option>
-                  <option value="01">01</option>
-                  <option value="02">02</option>
-                  <option value="03">03</option>
-                  <option value="04">04</option>
-                  <option value="05">05</option>
-                  <option value="06">06</option>
-                  <option value="07">07</option>
-                  <option value="08">08</option>
-                  <option value="09">09</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
+                  <option value="">Choose...</option>
+                  <option value="AL">AL</option>
+                  <option value="AK">AK</option>
+                  <option value="AZ">AZ</option>
+                  <option value="AR">AR</option>
+                  <option value="CA">CA</option>
+                  <option value="CO">CO</option>
+                  <option value="CT">CT</option>
+                  <option value="DE">DE</option>
+                  <option value="FL">FL</option>
+                  <option value="GA">GA</option>
+                  <option value="HI">HI</option>
+                  <option value="ID">ID</option>
+                  <option value="IL">IL</option>
+                  <option value="IN">IN</option>
+                  <option value="IA">IA</option>
+                  <option value="KS">KS</option>
+                  <option value="KY">KY</option>
+                  <option value="LA">LA</option>
+                  <option value="ME">ME</option>
+                  <option value="MD">MD</option>
+                  <option value="MA">MA</option>
+                  <option value="MI">MI</option>
+                  <option value="MN">MN</option>
+                  <option value="MS">MS</option>
+                  <option value="MO">MO</option>
+                  <option value="MT">MT</option>
+                  <option value="NE">NE</option>
+                  <option value="NV">NV</option>
+                  <option value="NH">NH</option>
+                  <option value="NJ">NJ</option>
+                  <option value="NM">NM</option>
+                  <option value="NY">NY</option>
+                  <option value="NC">NC</option>
+                  <option value="ND">ND</option>
+                  <option value="OH">OH</option>
+                  <option value="OK">OK</option>
+                  <option value="OR">OR</option>
+                  <option value="PA">PA</option>
+                  <option value="RI">RI</option>
+                  <option value="SC">SC</option>
+                  <option value="SD">SD</option>
+                  <option value="TN">TN</option>
+                  <option value="TX">TX</option>
+                  <option value="UT">UT</option>
+                  <option value="VT">VT</option>
+                  <option value="VA">VA</option>
+                  <option value="WA">WA</option>
+                  <option value="WV">WV</option>
+                  <option value="WI">WI</option>
+                  <option value="WY">WY</option>
                 </select>
-                <select
-                  name="expYear"
-                  value={this.state.expYear}
-                  className={`form-control col ${checkYear}`}
+                <div className="invalid-feedback">Select a state</div>
+              </div>
+            </div>
+
+            <div className="row mt-3">
+              <div className="col-md-6">
+                <label>
+                  Credit card number<span className="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="creditCard"
+                  value={this.state.creditCard}
+                  className={`form-control ${checkCard}`}
+                  placeholder="0000 0000 0000 0000"
+                  maxLength="16"
                   onChange={this.handleInputChange}
-                  minLength="4"
+                  required
+                />
+                <div className="invalid-feedback">
+                  Please enter a valid credit card number
+                </div>
+              </div>
+              <div className="col-md-3">
+                <label>
+                  Expiration date<span className="text-danger">*</span>
+                </label>
+                <div className="d-flex">
+                  <select
+                    name="expMonth"
+                    value={this.state.expMonth}
+                    className={`form-control col mr-2 ${checkMonth}`}
+                    onChange={this.handleInputChange}
+                    maxLength="2"
+                    required
+                  >
+                    <option value="">Month</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                  </select>
+                  <select
+                    name="expYear"
+                    value={this.state.expYear}
+                    className={`form-control col ${checkYear}`}
+                    onChange={this.handleInputChange}
+                    minLength="4"
+                    maxLength="4"
+                    required
+                  >
+                    <option value="">Year</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                  </select>
+                </div>
+              </div>
+              <div className="col-md-3">
+                <label>
+                  CVV<span className="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="cvv"
+                  placeholder="XXX"
+                  value={this.state.cvv}
+                  className={`form-control ${checkCvv}`}
+                  onChange={this.handleInputChange}
                   maxLength="4"
                   required
-                >
-                  <option value="">Year</option>
-                  <option value="2020">2020</option>
-                  <option value="2021">2021</option>
-                  <option value="2022">2022</option>
-                  <option value="2023">2023</option>
-                  <option value="2024">2024</option>
-                  <option value="2025">2025</option>
-                  <option value="2026">2026</option>
-                  <option value="2027">2027</option>
-                  <option value="2028">2028</option>
-                </select>
+                />
+                <div className="invalid-feedback">
+                  Please enter a valid CVV number
+                </div>
               </div>
             </div>
-            <div className="col-md-3">
-              <label>
-                CVV<span className="text-danger">*</span>
-              </label>
-              <input
-                type="text"
-                name="cvv"
-                value={this.state.cvv}
-                className={`form-control ${checkCvv}`}
-                onChange={this.handleInputChange}
-                maxLength="4"
-                required
-              />
-              <div className="invalid-feedback">
-                Please enter a valid CVV number
-              </div>
-            </div>
-          </div>
 
-          <div className="container d-flex justify-content-between mt-3 mb-5">
-            <div
-              className="linkPointer text-muted"
-              onClick={() => this.props.setView('catalog')}
-            >
-              <i className="fas fa-angle-double-left mr-2" />
-              Continue Shopping
+            <div className="container d-flex justify-content-between mt-3 mb-5">
+              <div
+                className="linkPointer text-muted"
+                onClick={() => this.props.setView('catalog')}
+              >
+                <i className="fas fa-angle-double-left mr-2" />
+                Continue Shopping
+              </div>
+              <button type="submit" className="linkPointer btn btn-primary">
+                Place Order
+              </button>
             </div>
-            <button type="submit" className="linkPointer btn btn-primary">
-              Place Order
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     );
   }
