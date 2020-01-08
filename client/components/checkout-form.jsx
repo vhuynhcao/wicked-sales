@@ -4,8 +4,7 @@ class CheckoutForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
+      fullName: '',
       email: '',
       address1: '',
       address2: '',
@@ -17,8 +16,7 @@ class CheckoutForm extends React.Component {
       expYear: '',
       cvv: '',
       validate: {
-        firstName: true,
-        lastName: true,
+        fullName: true,
         email: true,
         address1: true,
         city: true,
@@ -46,8 +44,7 @@ class CheckoutForm extends React.Component {
 
   validateForm() {
     const validate = {
-      firstName: true,
-      lastName: true,
+      fullName: true,
       email: true,
       address1: true,
       city: true,
@@ -63,22 +60,14 @@ class CheckoutForm extends React.Component {
     const zipRegex = RegExp(/^\d{1,5}$/);
     const alphaRegex = RegExp(/^[A-Za-z ]+$/);
     const cardRegex = RegExp(/^[0-9 ]*$/);
-    const cvvRegex = RegExp(/^[0-9]{3,4}$/);
+    // const cvvRegex = RegExp(/^[0-9]{3,4}$/);
 
-    if (this.state.firstName.length < 2) {
-      validate.firstName = false;
+    if (this.state.fullName.length < 5) {
+      validate.fullName = false;
     }
 
-    if (!alphaRegex.test(this.state.firstName)) {
-      validate.firstName = false;
-    }
-
-    if (this.state.lastName.length < 2) {
-      validate.lastName = false;
-    }
-
-    if (!alphaRegex.test(this.state.lastName)) {
-      validate.lastName = false;
+    if (!alphaRegex.test(this.state.fullName)) {
+      validate.fullName = false;
     }
 
     if (this.state.email.length < 6) {
@@ -133,7 +122,7 @@ class CheckoutForm extends React.Component {
       validate.cvv = false;
     }
 
-    if (!cvvRegex.test(this.state.cvv)) {
+    if (!cardRegex.test(this.state.cvv)) {
       validate.cvv = false;
     }
 
@@ -143,8 +132,7 @@ class CheckoutForm extends React.Component {
   render() {
     let totalPrice = 0;
     this.props.viewPrice.map(product => (totalPrice = totalPrice + product.price));
-    const checkFirstName = this.state.validate.firstName ? null : 'is-invalid';
-    const checkLastName = this.state.validate.lastName ? null : 'is-invalid';
+    const checkFullName = this.state.validate.fullName ? null : 'is-invalid';
     const checkEmail = this.state.validate.email ? null : 'is-invalid';
     const checkAddress = this.state.validate.address1 ? null : 'is-invalid';
     const checkCity = this.state.validate.city ? null : 'is-invalid';
@@ -168,42 +156,22 @@ class CheckoutForm extends React.Component {
           <div className="row">
             <div className="col-md-6">
               <label>
-                First name<span className="text-danger">*</span>
+                Full name<span className="text-danger">*</span>
               </label>
               <input
                 type="text"
-                name="firstName"
-                value={this.state.firstName}
-                className={`form-control ${checkFirstName}`}
+                name="fullName"
+                value={this.state.fullName}
+                className={`form-control ${checkFullName}`}
                 onChange={this.handleInputChange}
-                maxLength="32"
+                maxLength="65"
                 required
               />
               <div className="invalid-feedback">
-                Name must be longer than 2 characters and alphabet characters
+                Name must be longer than 5 characters and alphabet characters
               </div>
             </div>
             <div className="col-md-6">
-              <label>
-                Last name<span className="text-danger">*</span>
-              </label>
-              <input
-                type="text"
-                name="lastName"
-                value={this.state.lastName}
-                className={`form-control ${checkLastName}`}
-                onChange={this.handleInputChange}
-                maxLength="32"
-                required
-              />
-              <div className="invalid-feedback">
-                Name must be longer than 2 characters and alphabet characters
-              </div>
-            </div>
-          </div>
-
-          <div className="row mt-3">
-            <div className="col">
               <label>
                 Email<span className="text-danger">*</span>
               </label>
@@ -270,9 +238,7 @@ class CheckoutForm extends React.Component {
                 maxLength="50"
                 required
               />
-              <div className="invalid-feedback">
-                Please enter a valid city
-              </div>
+              <div className="invalid-feedback">Please enter a valid city</div>
             </div>
             <div className="col-md-4">
               <label>
@@ -301,7 +267,7 @@ class CheckoutForm extends React.Component {
                 maxLength="2"
                 required
               >
-                <option>Choose...</option>
+                <option value="">Choose...</option>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AZ">AZ</option>
@@ -363,12 +329,12 @@ class CheckoutForm extends React.Component {
                 Credit card number<span className="text-danger">*</span>
               </label>
               <input
-                type="tel"
+                type="text"
                 name="creditCard"
                 value={this.state.creditCard}
                 className={`form-control ${checkCard}`}
                 placeholder="0000 0000 0000 0000"
-                maxLength="20"
+                maxLength="16"
                 onChange={this.handleInputChange}
                 required
               />
@@ -389,7 +355,7 @@ class CheckoutForm extends React.Component {
                   maxLength="2"
                   required
                 >
-                  <option>Month</option>
+                  <option value="">Month</option>
                   <option value="01">01</option>
                   <option value="02">02</option>
                   <option value="03">03</option>
@@ -410,8 +376,9 @@ class CheckoutForm extends React.Component {
                   onChange={this.handleInputChange}
                   minLength="4"
                   maxLength="4"
+                  required
                 >
-                  <option>Year</option>
+                  <option value="">Year</option>
                   <option value="2020">2020</option>
                   <option value="2021">2021</option>
                   <option value="2022">2022</option>

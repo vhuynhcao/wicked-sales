@@ -86,8 +86,7 @@ export default class App extends React.Component {
   }
 
   placeOrder({
-    firstName,
-    lastName,
+    fullName,
     email,
     address1,
     address2,
@@ -102,8 +101,7 @@ export default class App extends React.Component {
     const request = {
       method: 'POST',
       body: JSON.stringify({
-        firstName,
-        lastName,
+        fullName,
         email,
         address1,
         address2,
