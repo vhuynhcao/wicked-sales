@@ -165,7 +165,6 @@ class CheckoutForm extends React.Component {
           Please do not use real personal information in the form.
         </p>
         <div className="row">
-
           <div className="col-md-4 order-md-2">
             <h4 className="d-flex justify-content-between align-items-center">
               <p className="text-muted">Your cart summary</p>
@@ -282,6 +281,10 @@ class CheckoutForm extends React.Component {
                   value={this.state.zip}
                   className={`form-control ${checkZip}`}
                   onChange={this.handleInputChange}
+                  onKeyDown={event =>
+                    ['e', 'E', '+', '-'].includes(event.key) &&
+                    event.preventDefault()
+                  }
                   maxLength="5"
                   required
                 />
@@ -367,6 +370,10 @@ class CheckoutForm extends React.Component {
                   name="creditCard"
                   value={this.state.creditCard}
                   className={`form-control ${checkCard}`}
+                  onKeyDown={event =>
+                    ['e', 'E', '+', '-'].includes(event.key) &&
+                    event.preventDefault()
+                  }
                   placeholder="0000 0000 0000 0000"
                   maxLength="16"
                   onChange={this.handleInputChange}
@@ -435,6 +442,10 @@ class CheckoutForm extends React.Component {
                   placeholder="000"
                   value={this.state.cvv}
                   className={`form-control ${checkCvv}`}
+                  onKeyDown={event =>
+                    ['e', 'E', '+', '-'].includes(event.key) &&
+                    event.preventDefault()
+                  }
                   onChange={this.handleInputChange}
                   maxLength="4"
                   required
