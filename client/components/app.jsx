@@ -5,6 +5,7 @@ import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
 import DemoModal from './demo-modal';
+import Confirmation from './confirmation';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -122,7 +123,7 @@ export default class App extends React.Component {
       .then(order => {
         this.setState({
           view: {
-            name: 'catalog',
+            name: 'confirm',
             params: {}
           },
           cart: []
@@ -173,6 +174,10 @@ export default class App extends React.Component {
           viewPrice={this.state.cart}
           cartQuantity={this.state.cart}
         />
+      );
+    } else if (stateName === 'confirm') {
+      currentView = (
+        <Confirmation setView={this.setView}/>
       );
     }
 
