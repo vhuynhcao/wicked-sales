@@ -61,7 +61,6 @@ class CheckoutForm extends React.Component {
     const zipRegex = RegExp(/^\d{1,5}$/);
     const alphaRegex = RegExp(/^[A-Za-z ]+$/);
     const cardRegex = RegExp(/^[0-9 ]*$/);
-    // const cvvRegex = RegExp(/^[0-9]{3,4}$/);
 
     if (this.state.fullName.length < 5) {
       validate.fullName = false;
@@ -205,7 +204,7 @@ class CheckoutForm extends React.Component {
                   Email<span className="text-danger">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="email"
                   name="email"
                   value={this.state.email}
                   className={`form-control ${checkEmail}`}
@@ -277,9 +276,9 @@ class CheckoutForm extends React.Component {
                   Zip Code<span className="text-danger">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="zip"
-                  placeholder="XXXXX"
+                  placeholder="00000"
                   value={this.state.zip}
                   className={`form-control ${checkZip}`}
                   onChange={this.handleInputChange}
@@ -364,7 +363,7 @@ class CheckoutForm extends React.Component {
                   Credit card number<span className="text-danger">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="creditCard"
                   value={this.state.creditCard}
                   className={`form-control ${checkCard}`}
@@ -431,9 +430,9 @@ class CheckoutForm extends React.Component {
                   CVV<span className="text-danger">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="cvv"
-                  placeholder="XXX"
+                  placeholder="000"
                   value={this.state.cvv}
                   className={`form-control ${checkCvv}`}
                   onChange={this.handleInputChange}

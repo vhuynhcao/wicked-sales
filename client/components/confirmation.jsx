@@ -7,8 +7,7 @@ class Confirmation extends React.Component {
       <div className="container">
         <div className="text-center">
           <h1>Thank you for your order!</h1>
-          A confirmation e-mail with your order details will be sent to the
-          e-mail provided.
+          Your order has been successfully submitted.
         </div>
       </div>
     );
