@@ -63,7 +63,7 @@ class ProductDetails extends React.Component {
                   {'$' + (singleProduct.price / 100).toFixed(2)}
                 </h4>
                 <p className="card-text">{singleProduct.shortDescription}</p>
-                <button className="linkPointer btn btn-secondary"
+                <button className="linkPointer btn btn-primary"
                   onClick={() => {
                     this.showModal();
                     addToCart({ productId: singleProduct.productId, operator: '+' });

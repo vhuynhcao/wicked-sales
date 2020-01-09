@@ -39,8 +39,27 @@ class CheckoutForm extends React.Component {
   }
 
   handleInputSubmit(event) {
-    event.preventDefault();
+    if (!this.canSubmit()) {
+      event.preventDefault();
+      return;
+    }
     this.props.placeOrder(this.state);
+  }
+
+  canSubmit() {
+    const { fullName, email, address1, city, zip, state, creditCard, expMonth, expYear, cvv } = this.state;
+    return (
+      fullName.length > 0 &&
+      email.length > 0 &&
+      address1.length > 0 &&
+      city.length > 0 &&
+      zip.length > 0 &&
+      state.length > 0 &&
+      creditCard.length > 0 &&
+      expMonth.length > 0 &&
+      expYear.length > 0 &&
+      cvv.length > 0
+    );
   }
 
   validateForm() {
@@ -157,6 +176,10 @@ class CheckoutForm extends React.Component {
     const checkMonth = this.state.validate.expMonth ? null : 'is-invalid';
     const checkYear = this.state.validate.expYear ? null : 'is-invalid';
     const checkCvv = this.state.validate.cvv ? null : 'is-invalid';
+
+    const isEnabled = this.canSubmit();
+
+    const alphabet = ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H', 'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T', 'u', 'U', 'v', 'V', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z'];
 
     return (
       <div className="container">
@@ -275,14 +298,14 @@ class CheckoutForm extends React.Component {
                   Zip Code<span className="text-danger">*</span>
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="zip"
                   placeholder="00000"
                   value={this.state.zip}
                   className={`form-control ${checkZip}`}
                   onChange={this.handleInputChange}
                   onKeyDown={event =>
-                    ['e', 'E', '+', '-'].includes(event.key) &&
+                    alphabet.includes(event.key) &&
                     event.preventDefault()
                   }
                   maxLength="5"
@@ -366,17 +389,17 @@ class CheckoutForm extends React.Component {
                   Credit card number<span className="text-danger">*</span>
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="creditCard"
                   value={this.state.creditCard}
                   className={`form-control ${checkCard}`}
                   onKeyDown={event =>
-                    ['e', 'E', '+', '-'].includes(event.key) &&
+                    alphabet.includes(event.key) &&
                     event.preventDefault()
                   }
                   placeholder="0000 0000 0000 0000"
-                  maxLength="16"
                   onChange={this.handleInputChange}
+                  maxLength="16"
                   required
                 />
                 <div className="invalid-feedback">
@@ -437,13 +460,13 @@ class CheckoutForm extends React.Component {
                   CVV<span className="text-danger">*</span>
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="cvv"
                   placeholder="000"
                   value={this.state.cvv}
                   className={`form-control ${checkCvv}`}
                   onKeyDown={event =>
-                    ['e', 'E', '+', '-'].includes(event.key) &&
+                    alphabet.includes(event.key) &&
                     event.preventDefault()
                   }
                   onChange={this.handleInputChange}
@@ -464,7 +487,11 @@ class CheckoutForm extends React.Component {
                 <i className="fas fa-angle-double-left mr-2" />
                 Continue Shopping
               </div>
-              <button type="submit" className="linkPointer btn btn-primary">
+              <button
+                disabled={!isEnabled}
+                type="submit"
+                className="linkPointer btn btn-primary"
+              >
                 Place Order
               </button>
             </div>
