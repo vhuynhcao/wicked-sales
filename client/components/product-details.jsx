@@ -39,7 +39,7 @@ class ProductDetails extends React.Component {
     };
 
     return (
-      <div className="container-fluid">
+      <div className="container-fluid col-md-10">
         <>{cartContModal}</>
         <div
           className="linkPointer text-muted"
@@ -50,13 +50,13 @@ class ProductDetails extends React.Component {
         </div>
         <div className="card">
           <div className="row no-gutters mb-4">
-            <div className="col-md-4">
+            <div className="col-md-4 text-center">
               <img style={imgFit}
                 src={singleProduct.image}
-                className="img-fluid float-left ml-2 mt-2"
+                className="border rounded ml-2 mt-2"
               />
             </div>
-            <div className="container col-sm-4">
+            <div className="container col-md-6">
               <div className="card-body">
                 <h3 className="card-title">{singleProduct.name}</h3>
                 <h4 className="text-muted card-text">
