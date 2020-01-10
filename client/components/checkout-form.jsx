@@ -179,6 +179,8 @@ class CheckoutForm extends React.Component {
 
     const isEnabled = this.canSubmit();
 
+    const activePointer = isEnabled ? 'linkPointer' : null;
+
     const alphabet = ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H', 'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T', 'u', 'U', 'v', 'V', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z'];
 
     return (
@@ -490,7 +492,7 @@ class CheckoutForm extends React.Component {
               <button
                 disabled={!isEnabled}
                 type="submit"
-                className="linkPointer btn btn-primary"
+                className={`${activePointer} btn btn-primary`}
               >
                 Place Order
               </button>
