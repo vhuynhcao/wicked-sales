@@ -39,27 +39,8 @@ class CheckoutForm extends React.Component {
   }
 
   handleInputSubmit(event) {
-    if (!this.canSubmit()) {
-      event.preventDefault();
-      return;
-    }
+    event.preventDefault();
     this.props.placeOrder(this.state);
-  }
-
-  canSubmit() {
-    const { fullName, email, address1, city, zip, state, creditCard, expMonth, expYear, cvv } = this.state;
-    return (
-      fullName.length > 0 &&
-      email.length > 0 &&
-      address1.length > 0 &&
-      city.length > 0 &&
-      zip.length > 0 &&
-      state.length > 0 &&
-      creditCard.length > 0 &&
-      expMonth.length > 0 &&
-      expYear.length > 0 &&
-      cvv.length > 0
-    );
   }
 
   validateForm() {
@@ -149,6 +130,18 @@ class CheckoutForm extends React.Component {
   }
 
   render() {
+    const {
+      fullName,
+      email,
+      address1,
+      city,
+      zip,
+      state,
+      creditCard,
+      expMonth,
+      expYear,
+      cvv
+    } = this.state;
 
     let totalPrice = 0;
     this.props.viewPrice.map(product => (totalPrice = totalPrice + product.price));
@@ -177,7 +170,17 @@ class CheckoutForm extends React.Component {
     const checkYear = this.state.validate.expYear ? null : 'is-invalid';
     const checkCvv = this.state.validate.cvv ? null : 'is-invalid';
 
-    const isEnabled = this.canSubmit();
+    const isEnabled =
+      fullName.length > 0 &&
+      email.length > 0 &&
+      address1.length > 0 &&
+      city.length > 0 &&
+      zip.length > 0 &&
+      state.length > 0 &&
+      creditCard.length > 0 &&
+      expMonth.length > 0 &&
+      expYear.length > 0 &&
+      cvv.length > 0;
 
     const activePointer = isEnabled ? 'linkPointer' : null;
 

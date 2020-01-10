@@ -48,12 +48,12 @@ class ProductDetails extends React.Component {
           <i className="fas fa-angle-double-left mr-2" />
           Back to Catalog
         </div>
-        <div className="card">
+        <div className="card mb-2">
           <div className="row no-gutters mb-4">
             <div className="col-md-4 text-center">
               <img style={imgFit}
                 src={singleProduct.image}
-                className="border rounded ml-2 mt-2"
+                className="ml-2 mt-2"
               />
             </div>
             <div className="container col-md-6">
@@ -73,7 +73,7 @@ class ProductDetails extends React.Component {
               </div>
             </div>
           </div>
-          <div className="container card-text mb-3">
+          <div className="container card-text mb-1">
             {singleProduct.longDescription}
           </div>
         </div>

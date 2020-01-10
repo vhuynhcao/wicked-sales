@@ -12,7 +12,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'checkout',
+        name: 'catalog',
         params: {}
       },
       cart: [],
@@ -123,8 +123,7 @@ export default class App extends React.Component {
       .then(order => {
         this.setState({
           view: {
-            name: 'confirm',
-            params: {}
+            name: 'confirm'
           },
           cart: []
         });
