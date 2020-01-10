@@ -205,7 +205,7 @@ class CheckoutForm extends React.Component {
 
           <form className="col-md-8" onSubmit={this.handleInputSubmit}>
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-6 mb-3">
                 <label>
                   Full name<span className="text-danger">*</span>
                 </label>
@@ -223,7 +223,7 @@ class CheckoutForm extends React.Component {
                   Name must be longer than 5 characters and alphabet characters
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6 mb-3">
                 <label>
                   Email<span className="text-danger">*</span>
                 </label>
@@ -243,8 +243,8 @@ class CheckoutForm extends React.Component {
               </div>
             </div>
 
-            <div className="row mt-3">
-              <div className="col-md-6">
+            <div className="row">
+              <div className="col-md-6 mb-3">
                 <label>
                   Address Line 1<span className="text-danger">*</span>
                 </label>
@@ -262,7 +262,7 @@ class CheckoutForm extends React.Component {
                   Address must be longer than 6 characters
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6 mb-3">
                 <label>Address Line 2</label>
                 <input
                   type="text"
@@ -276,8 +276,8 @@ class CheckoutForm extends React.Component {
               </div>
             </div>
 
-            <div className="row mt-3">
-              <div className="col-md-4">
+            <div className="row">
+              <div className="col-md-4 mb-3">
                 <label>
                   City<span className="text-danger">*</span>
                 </label>
@@ -295,7 +295,7 @@ class CheckoutForm extends React.Component {
                   Please enter a valid city
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-4 mb-3">
                 <label>
                   Zip Code<span className="text-danger">*</span>
                 </label>
@@ -317,7 +317,7 @@ class CheckoutForm extends React.Component {
                   Valid zip code is required
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-4 mb-3">
                 <label>
                   State<span className="text-danger">*</span>
                 </label>
@@ -385,8 +385,8 @@ class CheckoutForm extends React.Component {
               </div>
             </div>
 
-            <div className="row mt-3">
-              <div className="col-md-6">
+            <div className="row">
+              <div className="col-md-6 mb-3">
                 <label>
                   Credit card number<span className="text-danger">*</span>
                 </label>
@@ -408,7 +408,7 @@ class CheckoutForm extends React.Component {
                   Please enter a valid credit card number
                 </div>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-3 mb-3">
                 <label>
                   Expiration date<span className="text-danger">*</span>
                 </label>
@@ -457,7 +457,7 @@ class CheckoutForm extends React.Component {
                   </select>
                 </div>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-3 mb-3">
                 <label>
                   CVV<span className="text-danger">*</span>
                 </label>
