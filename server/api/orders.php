@@ -7,6 +7,7 @@ if($request['method'] === 'POST'){
   if(!isset($cartId)){
     throw new ApiError('Inactive shopping cart', 400);
   } else {
+    $cartId = $_SESSION['cart_id'];
     $fullName = $request['body']['fullName'];
     $email = $request['body']['email'];
     $address1 = $request['body']['address1'];
