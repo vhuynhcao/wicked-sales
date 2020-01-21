@@ -39,7 +39,7 @@ class ProductDetails extends React.Component {
     };
 
     return (
-      <div className="container-fluid">
+      <div className="container-fluid col-md-10">
         <>{cartContModal}</>
         <div
           className="linkPointer text-muted"
@@ -48,22 +48,22 @@ class ProductDetails extends React.Component {
           <i className="fas fa-angle-double-left mr-2" />
           Back to Catalog
         </div>
-        <div className="card">
+        <div className="card mb-2">
           <div className="row no-gutters mb-4">
-            <div className="col-md-4">
+            <div className="col-md-4 text-center">
               <img style={imgFit}
                 src={singleProduct.image}
-                className="img-fluid float-left ml-2 mt-2"
+                className="ml-2 mt-2"
               />
             </div>
-            <div className="container col-sm-4">
+            <div className="container col-md-6">
               <div className="card-body">
                 <h3 className="card-title">{singleProduct.name}</h3>
                 <h4 className="text-muted card-text">
                   {'$' + (singleProduct.price / 100).toFixed(2)}
                 </h4>
                 <p className="card-text">{singleProduct.shortDescription}</p>
-                <button className="linkPointer btn btn-secondary"
+                <button className="linkPointer btn btn-primary"
                   onClick={() => {
                     this.showModal();
                     addToCart({ productId: singleProduct.productId, operator: '+' });
@@ -73,7 +73,7 @@ class ProductDetails extends React.Component {
               </div>
             </div>
           </div>
-          <div className="container card-text mb-3">
+          <div className="container card-text mb-1">
             {singleProduct.longDescription}
           </div>
         </div>

@@ -1,12 +1,10 @@
 <?php
 
-$link = get_db_link();
-$cartId = $_SESSION['cart_id'];
-
 if($request['method'] === 'GET'){
   if(!isset($_SESSION['cart_id'])) {
     $response['body'] = [];
   } else {
+    $link = get_db_link();
     $cartId = $_SESSION['cart_id'];
     $cartInSess = "SELECT * FROM cartItems
                             JOIN products
@@ -24,6 +22,7 @@ if($request['method'] === 'POST'){
   if(!isset($request['body']['productId']) || intval($request['body']['productId']) === 0){
     throw new ApiError("Product ID is not valid", 400);
   } else{
+    $link = get_db_link();
     $productId = $request['body']['productId'];
     $operator = $request['body']['operator'];
     $priceSql = "SELECT price
@@ -40,6 +39,7 @@ if($request['method'] === 'POST'){
     } else {
       $cartId = $_SESSION['cart_id'];
     }
+    $link = get_db_link();
     $cartInfoSql = "INSERT INTO `cartItems` (cartId, productId, price, quantity)
                     VALUES ($cartId, $productId, $priceArray, 1)
                     ON DUPLICATE KEY
@@ -65,6 +65,7 @@ if ($request['method'] === 'DELETE') {
   if (!isset($productId) || !isset($cartItemId) || !isset($cartId)) {
     throw new ApiError('Product ID is not valid', 400);
   } else {
+    $link = get_db_link();
     $removeItem = "DELETE FROM cartItems
                           WHERE cartItemId = $cartItemId
                           AND productId = $productId

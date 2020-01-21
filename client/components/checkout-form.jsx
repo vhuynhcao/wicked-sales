@@ -130,6 +130,18 @@ class CheckoutForm extends React.Component {
   }
 
   render() {
+    const {
+      fullName,
+      email,
+      address1,
+      city,
+      zip,
+      state,
+      creditCard,
+      expMonth,
+      expYear,
+      cvv
+    } = this.state;
 
     let totalPrice = 0;
     this.props.viewPrice.map(product => (totalPrice = totalPrice + product.price));
@@ -158,6 +170,22 @@ class CheckoutForm extends React.Component {
     const checkYear = this.state.validate.expYear ? null : 'is-invalid';
     const checkCvv = this.state.validate.cvv ? null : 'is-invalid';
 
+    const isEnabled =
+      fullName.length > 0 &&
+      email.length > 0 &&
+      address1.length > 0 &&
+      city.length > 0 &&
+      zip.length > 0 &&
+      state.length > 0 &&
+      creditCard.length > 0 &&
+      expMonth.length > 0 &&
+      expYear.length > 0 &&
+      cvv.length > 0;
+
+    const activePointer = isEnabled ? 'linkPointer' : null;
+
+    const alphabet = ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H', 'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T', 'u', 'U', 'v', 'V', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z'];
+
     return (
       <div className="container">
         <h1>Checkout</h1>
@@ -165,7 +193,6 @@ class CheckoutForm extends React.Component {
           Please do not use real personal information in the form.
         </p>
         <div className="row">
-
           <div className="col-md-4 order-md-2">
             <h4 className="d-flex justify-content-between align-items-center">
               <p className="text-muted">Your cart summary</p>
@@ -181,7 +208,7 @@ class CheckoutForm extends React.Component {
 
           <form className="col-md-8" onSubmit={this.handleInputSubmit}>
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-6 mb-3">
                 <label>
                   Full name<span className="text-danger">*</span>
                 </label>
@@ -199,7 +226,7 @@ class CheckoutForm extends React.Component {
                   Name must be longer than 5 characters and alphabet characters
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6 mb-3">
                 <label>
                   Email<span className="text-danger">*</span>
                 </label>
@@ -219,8 +246,8 @@ class CheckoutForm extends React.Component {
               </div>
             </div>
 
-            <div className="row mt-3">
-              <div className="col-md-6">
+            <div className="row">
+              <div className="col-md-6 mb-3">
                 <label>
                   Address Line 1<span className="text-danger">*</span>
                 </label>
@@ -238,7 +265,7 @@ class CheckoutForm extends React.Component {
                   Address must be longer than 6 characters
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6 mb-3">
                 <label>Address Line 2</label>
                 <input
                   type="text"
@@ -252,8 +279,8 @@ class CheckoutForm extends React.Component {
               </div>
             </div>
 
-            <div className="row mt-3">
-              <div className="col-md-4">
+            <div className="row">
+              <div className="col-md-4 mb-3">
                 <label>
                   City<span className="text-danger">*</span>
                 </label>
@@ -271,17 +298,21 @@ class CheckoutForm extends React.Component {
                   Please enter a valid city
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-4 mb-3">
                 <label>
                   Zip Code<span className="text-danger">*</span>
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="zip"
                   placeholder="00000"
                   value={this.state.zip}
                   className={`form-control ${checkZip}`}
                   onChange={this.handleInputChange}
+                  onKeyDown={event =>
+                    alphabet.includes(event.key) &&
+                    event.preventDefault()
+                  }
                   maxLength="5"
                   required
                 />
@@ -289,7 +320,7 @@ class CheckoutForm extends React.Component {
                   Valid zip code is required
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-4 mb-3">
                 <label>
                   State<span className="text-danger">*</span>
                 </label>
@@ -357,26 +388,30 @@ class CheckoutForm extends React.Component {
               </div>
             </div>
 
-            <div className="row mt-3">
-              <div className="col-md-6">
+            <div className="row">
+              <div className="col-md-6 mb-3">
                 <label>
                   Credit card number<span className="text-danger">*</span>
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="creditCard"
                   value={this.state.creditCard}
                   className={`form-control ${checkCard}`}
+                  onKeyDown={event =>
+                    alphabet.includes(event.key) &&
+                    event.preventDefault()
+                  }
                   placeholder="0000 0000 0000 0000"
-                  maxLength="16"
                   onChange={this.handleInputChange}
+                  maxLength="16"
                   required
                 />
                 <div className="invalid-feedback">
                   Please enter a valid credit card number
                 </div>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-3 mb-3">
                 <label>
                   Expiration date<span className="text-danger">*</span>
                 </label>
@@ -425,16 +460,20 @@ class CheckoutForm extends React.Component {
                   </select>
                 </div>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-3 mb-3">
                 <label>
                   CVV<span className="text-danger">*</span>
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="cvv"
                   placeholder="000"
                   value={this.state.cvv}
                   className={`form-control ${checkCvv}`}
+                  onKeyDown={event =>
+                    alphabet.includes(event.key) &&
+                    event.preventDefault()
+                  }
                   onChange={this.handleInputChange}
                   maxLength="4"
                   required
@@ -453,7 +492,11 @@ class CheckoutForm extends React.Component {
                 <i className="fas fa-angle-double-left mr-2" />
                 Continue Shopping
               </div>
-              <button type="submit" className="linkPointer btn btn-primary">
+              <button
+                disabled={!isEnabled}
+                type="submit"
+                className={`${activePointer} btn btn-primary`}
+              >
                 Place Order
               </button>
             </div>
