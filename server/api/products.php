@@ -3,7 +3,7 @@
 if($request['method']==='GET'){
   $link = get_db_link();
   $productId = $request['query']['productId'];
-  if(!empty($itemId)){
+  if(!empty($productId)){
     $products = one_product_detail($link, $productId);
   } else {
     $products = get_products($link);
