@@ -18,10 +18,13 @@ if($request['method'] === 'GET'){
   send($response);
 }
 
-if($request['method'] === 'POST'){
-  if(!isset($request['body']['productId']) || intval($request['body']['productId']) === 0){
+if ($request['method'] === 'POST') {
+  if(!isset($request['body']['operator'])){
+    throw new ApiError("Invalid operator", 400);
+  }
+  if (!isset($request['body']['productId']) || intval($request['body']['productId']) === 0) {
     throw new ApiError("Product ID is not valid", 400);
-  } else{
+  } else {
     $link = get_db_link();
     $productId = $request['body']['productId'];
     $operator = $request['body']['operator'];
@@ -30,8 +33,8 @@ if($request['method'] === 'POST'){
                 WHERE productId = $productId";
     $priceQuery = mysqli_query($link, $priceSql);
     $priceResult = mysqli_fetch_assoc($priceQuery);
-    $priceArray = $priceResult['price'];
-    if(!isset($_SESSION['cart_id'])){
+    $price = $priceResult['price'];
+    if (!isset($_SESSION['cart_id'])) {
       $createCartSql = "INSERT INTO carts (createdAt)
                         VALUES (CURRENT_TIMESTAMP)";
       $cartItemId = mysqli_query($link, $createCartSql);
@@ -39,22 +42,21 @@ if($request['method'] === 'POST'){
     } else {
       $cartId = $_SESSION['cart_id'];
     }
-    $link = get_db_link();
-    $cartInfoSql = "INSERT INTO `cartItems` (cartId, productId, price, quantity)
-                    VALUES ($cartId, $productId, $priceArray, 1)
-                    ON DUPLICATE KEY
-                    UPDATE quantity = quantity $operator 1";
+    $cartInfoSql = "INSERT INTO cartItems (cartId, productId, price, quantity)
+                  VALUES ($cartId, $productId, $price, 1)
+                  ON DUPLICATE KEY
+                  UPDATE quantity = quantity $operator 1";
     $cartInfo = mysqli_query($link, $cartInfoSql);
     $cartItemId = mysqli_insert_id($link);
     $cartInfo = "SELECT p.name, p.productId, p.price, p.shortDescription, p.image, c.cartItemId, c.quantity
-                  FROM products AS p
-                  JOIN cartItems AS c
-                  ON c.productId = p.productId
-                  WHERE c.cartItemId = $cartItemId";
+                FROM products AS p
+                JOIN cartItems AS c
+                ON c.productId = p.productId
+                WHERE c.cartItemId = $cartItemId";
     $cartInfoQuery = mysqli_query($link, $cartInfo);
     $cartResult = mysqli_fetch_assoc($cartInfoQuery);
-    $response['body'] = $cartResult;
     $_SESSION['cart_id'] = $cartId;
+    $response['body'] = $cartResult;
     send($response);
   }
 }
@@ -62,10 +64,11 @@ if($request['method'] === 'POST'){
 if ($request['method'] === 'DELETE') {
   $productId = $request['body']['productId'];
   $cartItemId = $request['body']['cartItemId'];
+  $cartId = $_SESSION['cart_id'];
+  $link = get_db_link();
   if (!isset($productId) || !isset($cartItemId) || !isset($cartId)) {
     throw new ApiError('Product ID is not valid', 400);
   } else {
-    $link = get_db_link();
     $removeItem = "DELETE FROM cartItems
                           WHERE cartItemId = $cartItemId
                           AND productId = $productId

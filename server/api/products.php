@@ -2,9 +2,9 @@
 
 if($request['method']==='GET'){
   $link = get_db_link();
-  $itemId = $request['query']['productId'];
+  $productId = $request['query']['productId'];
   if(!empty($itemId)){
-    $products = one_product_detail($link, $itemId);
+    $products = one_product_detail($link, $productId);
   } else {
     $products = get_products($link);
   }

@@ -71,3 +71,7 @@ set_exception_handler(function ($error) {
   ];
   send($response);
 });
+
+function terminal_log($value){
+  error_log($value, true);
+}
