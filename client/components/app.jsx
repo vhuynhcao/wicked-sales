@@ -12,7 +12,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'cart',
+        name: 'catalog',
         params: {}
       },
       cart: [],
@@ -144,9 +144,7 @@ export default class App extends React.Component {
     const stateParams = this.state.view.params;
     if (stateName === 'catalog') {
       currentView = (
-        <div className="productBox col-md-12">
-          <ProductList setView={this.setView} />
-        </div>
+        <ProductList setView={this.setView} />
       );
     } else if (stateName === 'details') {
       currentView = (
