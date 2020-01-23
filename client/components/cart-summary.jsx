@@ -5,7 +5,7 @@ function CartSummary(props) {
   const cartItems = props.viewCart;
 
   let totalPrice = 0;
-  cartItems.map(product => (totalPrice = totalPrice + product.price));
+  cartItems.filter(product => (totalPrice = totalPrice + (product.quantity * product.price)));
 
   let display = null;
   if (cartItems.length === 0) {
