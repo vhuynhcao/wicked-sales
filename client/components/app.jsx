@@ -12,7 +12,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'catalog',
+        name: 'cart',
         params: {}
       },
       cart: [],
@@ -68,10 +68,7 @@ export default class App extends React.Component {
             cartItem => cartItem.productId === product.productId
           )
         ) {
-          const cart = this.state.cart.filter(cartItem => {
-            return cartItem.cartItemId !== product.cartItemId;
-          });
-          cart.push(product);
+          const cart = this.state.cart.map(obj => Object.assign({}, obj));
           this.setState({ cart });
         } else {
           this.setState({ cart: this.state.cart.concat(product) });
