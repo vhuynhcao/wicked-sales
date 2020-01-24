@@ -46,7 +46,7 @@ function CartSummary(props) {
     );
   }
   return (
-    <>
+    <div className="container">
       <div
         className="linkPointer text-muted"
         onClick={() => props.setView('catalog')}
@@ -55,7 +55,7 @@ function CartSummary(props) {
       </div>
       <h1>My Cart</h1>
       {display}
-    </>
+    </div>
   );
 }
 

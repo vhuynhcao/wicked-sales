@@ -190,7 +190,7 @@ export default class App extends React.Component {
           cartItemCount={this.state.cart}
           setView={this.setView}
         />
-        <div className="container mt-4">{currentView}</div>
+        <div>{currentView}</div>
       </>
     );
   }

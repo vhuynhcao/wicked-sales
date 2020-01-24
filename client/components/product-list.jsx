@@ -32,9 +32,13 @@ class ProductList extends React.Component {
     });
 
     return (
-      <div className="row">
-        {productTable}
-      </div>
+      <>
+        <div className="banner-img">
+        </div>
+        <div className="container d-flex flex-wrap mb-3">
+          {productTable}
+        </div>
+      </>
     );
   }
 }
