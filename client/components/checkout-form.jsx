@@ -144,7 +144,9 @@ class CheckoutForm extends React.Component {
     } = this.state;
 
     let totalPrice = 0;
-    this.props.viewPrice.map(product => (totalPrice = totalPrice + product.price));
+    this.props.viewPrice.filter(
+      product => (totalPrice = totalPrice + (product.quantity * product.price))
+    );
 
     const miniCart = this.props.cartQuantity.map(item => {
       return (

@@ -34,7 +34,7 @@ class ProductDetails extends React.Component {
     const cartContModal = this.state.isOpen ? <CartOrContinueModal setView={this.props.setView} product={singleProduct}/> : null;
 
     const imgFit = {
-      maxHeight: '200px',
+      maxWidth: '250px',
       objectFit: 'contain'
     };
 
@@ -50,14 +50,14 @@ class ProductDetails extends React.Component {
         </div>
         <div className="card mb-2">
           <div className="row no-gutters mb-4">
-            <div className="col-md-4 text-center">
+            <div className="col-md-4 text-center mr-2">
               <img style={imgFit}
                 src={singleProduct.image}
                 className="ml-2 mt-2"
               />
             </div>
             <div className="container col-md-6">
-              <div className="card-body">
+              <div className="card-body ml-3">
                 <h3 className="card-title">{singleProduct.name}</h3>
                 <h4 className="text-muted card-text">
                   {'$' + (singleProduct.price / 100).toFixed(2)}
