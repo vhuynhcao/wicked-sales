@@ -42,7 +42,7 @@ class ProductDetails extends React.Component {
       <div className="container-fluid col-md-10">
         <>{cartContModal}</>
         <div
-          className="linkPointer text-muted"
+          className="link-pointer text-muted"
           onClick={() => this.props.setView('catalog', {})}
         >
           <i className="fas fa-angle-double-left mr-2" />
@@ -63,7 +63,7 @@ class ProductDetails extends React.Component {
                   {'$' + (singleProduct.price / 100).toFixed(2)}
                 </h4>
                 <p className="card-text">{singleProduct.shortDescription}</p>
-                <button className="linkPointer btn btn-primary"
+                <button className="link-pointer btn btn-primary"
                   onClick={() => {
                     this.showModal();
                     addToCart({ productId: singleProduct.productId, operator: '+' });

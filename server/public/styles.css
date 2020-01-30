@@ -31,7 +31,7 @@ body{
   z-index: 1;
 }
 
-.modalBox{
+.modal-box{
   position: fixed;
   height: 100%;
   width: 100%;
@@ -42,7 +42,7 @@ body{
   justify-content: center;
 }
 
-.innerModal{
+.inner-modal{
   position: absolute;
   max-width: 350px;
   text-align: center;
@@ -51,11 +51,11 @@ body{
   border-radius: 10px;
 }
 
-.linkPointer {
+.link-pointer {
   cursor: pointer;
 }
 
-.shopName{
+.shop-name{
   font-family: Adreena;
   font-size: 1.5rem;
 }
@@ -63,6 +63,10 @@ body{
 .item-name{
   font-family: WorkSansBold;
   font-size: 1.45rem;
+}
+
+.modal-item-name {
+  font-family: WorkSansBold;
 }
 
 .warning {

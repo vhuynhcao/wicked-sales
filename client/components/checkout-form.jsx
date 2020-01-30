@@ -184,7 +184,7 @@ class CheckoutForm extends React.Component {
       expYear.length > 0 &&
       cvv.length > 0;
 
-    const activePointer = isEnabled ? 'linkPointer' : null;
+    const activePointer = isEnabled ? 'link-pointer' : null;
 
     const alphabet = ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H', 'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T', 'u', 'U', 'v', 'V', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z'];
 
@@ -488,7 +488,7 @@ class CheckoutForm extends React.Component {
 
             <div className="container d-flex justify-content-between mt-3 mb-5">
               <div
-                className="linkPointer text-muted"
+                className="link-pointer text-muted"
                 onClick={() => this.props.setView('catalog')}
               >
                 <i className="fas fa-angle-double-left mr-2" />

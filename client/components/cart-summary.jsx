@@ -36,7 +36,7 @@ function CartSummary(props) {
           </h4>
           <button
             type="button"
-            className="linkPointer btn btn-primary"
+            className="link-pointer btn btn-primary"
             onClick={() => props.setView('checkout')}
           >
             Checkout
@@ -48,7 +48,7 @@ function CartSummary(props) {
   return (
     <div className="container">
       <div
-        className="linkPointer text-muted"
+        className="link-pointer text-muted"
         onClick={() => props.setView('catalog')}
       >
         <i className="fas fa-angle-double-left mr-2"/>Back to Catalog

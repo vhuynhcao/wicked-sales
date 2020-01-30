@@ -53,7 +53,7 @@ class CartSummaryItems extends React.Component {
                 {this.props.cartInfo.shortDescription}
               </p>
               <p
-                className="linkPointer text-secondary"
+                className="link-pointer text-secondary"
                 onClick={() => {
                   this.toggleModal();
                 }}
@@ -67,7 +67,7 @@ class CartSummaryItems extends React.Component {
                   role="group"
                 >
                   <button
-                    className="linkPointer rounded-sm btn-light"
+                    className="link-pointer rounded-sm btn-light"
                     type="button"
                     onClick={ removeOrDecrease }
                   >
@@ -75,7 +75,7 @@ class CartSummaryItems extends React.Component {
                   </button>
                   <div className="mx-3 quantity-number">{quantity}</div>
                   <button
-                    className="linkPointer rounded-sm btn-light"
+                    className="link-pointer rounded-sm btn-light"
                     type="button"
                     onClick={() => {
                       this.props.updateCart({ productId, operator: '+' });
