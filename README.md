@@ -1,6 +1,6 @@
 # Simply Creative
 
-(WIP) A full stack LAMP & React shopping cart app.
+A full stack LAMP & React shopping cart app.
 
 ## Technologies Used
 
