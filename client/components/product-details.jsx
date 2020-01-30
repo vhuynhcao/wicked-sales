@@ -39,45 +39,53 @@ class ProductDetails extends React.Component {
     };
 
     return (
-      <div className="container-fluid col-md-10">
-        <>{cartContModal}</>
-        <div
-          className="link-pointer text-muted"
-          onClick={() => this.props.setView('catalog', {})}
-        >
-          <i className="fas fa-angle-double-left mr-2" />
-          Back to Catalog
-        </div>
-        <div className="card mb-2">
-          <div className="row no-gutters mb-4">
-            <div className="col-md-4 text-center mr-2">
-              <img style={imgFit}
-                src={singleProduct.image}
-                className="ml-2 mt-2"
-              />
-            </div>
-            <div className="container col-md-6">
-              <div className="card-body ml-3">
-                <h3 className="card-title item-name">{singleProduct.name}</h3>
-                <h4 className="text-muted card-text">
-                  {'$' + (singleProduct.price / 100).toFixed(2)}
-                </h4>
-                <p className="card-text">{singleProduct.shortDescription}</p>
-                <button className="link-pointer btn btn-primary"
-                  onClick={() => {
-                    this.showModal();
-                    addToCart({ productId: singleProduct.productId, operator: '+' });
-                  }}>
-                  Add to Cart
-                </button>
+      <>
+        {cartContModal}
+        <div className="container-fluid col-md-10 fade-in">
+          <div
+            className="link-pointer text-muted"
+            onClick={() => this.props.setView('catalog', {})}
+          >
+            <i className="fas fa-angle-double-left mr-2" />
+            Back to Catalog
+          </div>
+          <div className="card mb-2">
+            <div className="row no-gutters mb-4">
+              <div className="col-md-4 text-center mr-2">
+                <img
+                  style={imgFit}
+                  src={singleProduct.image}
+                  className="ml-2 mt-2"
+                />
+              </div>
+              <div className="container col-md-6">
+                <div className="card-body ml-3">
+                  <h3 className="card-title item-name">{singleProduct.name}</h3>
+                  <h4 className="text-muted card-text">
+                    {'$' + (singleProduct.price / 100).toFixed(2)}
+                  </h4>
+                  <p className="card-text">{singleProduct.shortDescription}</p>
+                  <button
+                    className="link-pointer btn btn-primary"
+                    onClick={() => {
+                      this.showModal();
+                      addToCart({
+                        productId: singleProduct.productId,
+                        operator: '+'
+                      });
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="container card-text mb-1">
-            {singleProduct.longDescription}
+            <div className="container card-text mb-1">
+              {singleProduct.longDescription}
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
 
   }

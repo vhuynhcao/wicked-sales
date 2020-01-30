@@ -189,7 +189,7 @@ class CheckoutForm extends React.Component {
     const alphabet = ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H', 'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T', 'u', 'U', 'v', 'V', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z'];
 
     return (
-      <div className="container">
+      <div className="container fade-in">
         <h1>Checkout</h1>
         <p className="warning">
           Please do not use real personal information in the form.

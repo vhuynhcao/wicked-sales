@@ -22,8 +22,11 @@ body{
   font-family: WorkSans;
 }
 
-* {
-  animation: fadeIn 1s;
+.fade-in {
+  animation-name: fadeIn;
+  animation-timing-function: ease-in;
+  animation-duration: .25s;
+  animation-fill-mode: forwards;
 }
 
 .header{
@@ -80,26 +83,6 @@ body{
 
 .quantity-number{
   font-size: larger;
-}
-
-.banner-img{
-  background-image: url(images/hero-img.jpg);
-  height: 45vh;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 0% 80%;
-}
-
-@media only screen and (max-width: 600px){
-  .banner-img{
-    height: 25vh;
-  }
-}
-
-@media only screen and (max-height: 1024px) {
-  .banner-img {
-    background-position: 55% 80%;
-  }
 }
 
 @keyframes fadeIn {

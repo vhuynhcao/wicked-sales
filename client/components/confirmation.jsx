@@ -4,7 +4,7 @@ class Confirmation extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container fade-in">
         <div className="text-center">
           <h1>Thank you for your order!</h1>
           Your order has been successfully submitted.

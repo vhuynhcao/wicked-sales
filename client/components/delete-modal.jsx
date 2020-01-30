@@ -15,7 +15,7 @@ class DeleteModal extends React.Component {
     }
     return (
       <div className="modal-box d-flex">
-        <div className="inner-modal bg-light">
+        <div className="inner-modal bg-light fade-in">
           <p className="ml-3 mr-3">
             Are you sure you want to remove{' '}
             <span className="modal-item-name">

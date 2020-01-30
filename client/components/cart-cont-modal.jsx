@@ -7,7 +7,7 @@ class CartOrContinueModal extends React.Component {
     const view = this.props.setView;
     return (
       <div className="modal-box d-flex">
-        <div className="inner-modal bg-light">
+        <div className="inner-modal bg-light fade-in">
           <h5 className="m-3">New Item Added</h5>
           <p className="ml-3 mr-3">
             You have successfully <span className="modal-item-name">{product.name}</span> added to your
