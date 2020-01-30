@@ -45,7 +45,7 @@ class CartSummaryItems extends React.Component {
           </div>
           <div className="col-md-8">
             <div className="card-body">
-              <h4 className="card-title">{this.props.cartInfo.name}</h4>
+              <h4 className="card-title item-name">{this.props.cartInfo.name}</h4>
               <h6 className="card-text text-muted">
                 {'$' + (this.props.cartInfo.price / 100).toFixed(2)}
               </h6>

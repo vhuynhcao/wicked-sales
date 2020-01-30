@@ -3,12 +3,27 @@
   src: url(AdreenaScript-Demo.otf);
 }
 
+@font-face{
+  font-family: WorkSans;
+  src: url(WorkSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: WorkSansBold;
+  src: url(WorkSans-ExtraBold.ttf);
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body{
   overflow-x: hidden;
+  font-family: WorkSans;
+}
+
+* {
+  animation: fadeIn 1s;
 }
 
 .header{
@@ -45,6 +60,10 @@ body{
   font-size: 1.5rem;
 }
 
+.item-name{
+  font-family: WorkSansBold;
+}
+
 .warning {
   font-style: oblique;
   color: red;
@@ -60,14 +79,25 @@ body{
 
 .banner-img{
   background-image: url(images/hero-img.jpg);
-  height: 60vh;
+  height: 45vh;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: 0% 80%;
 }
 
 @media only screen and (max-width: 600px){
   .banner-img{
-    height: 35vh;
+    height: 25vh;
   }
+}
+
+@media only screen and (max-height: 1024px) {
+  .banner-img {
+    background-position: 55% 80%;
+  }
+}
+
+@keyframes fadeIn {
+  from{opacity: 0;}
+  to{opacity: 1;}
 }

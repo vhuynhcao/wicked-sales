@@ -35,9 +35,7 @@ class ProductList extends React.Component {
       <>
         <div className="banner-img">
         </div>
-        <div className="container d-flex flex-wrap mb-3">
-          {productTable}
-        </div>
+        <div className="container d-flex flex-wrap mb-3">{productTable}</div>
       </>
     );
   }
