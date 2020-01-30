@@ -28,7 +28,7 @@
 
 ## Preview
 
-![alt text](https://github.com/vhuynhcao/wicked-sales/blob/master/server/public/images/simply-creative.gif?raw=true)
+![alt text](https://github.com/vhuynhcao/simply-creative/blob/master/server/public/images/simply-creative.gif?raw=true)
 
 
 #### System Requirements
