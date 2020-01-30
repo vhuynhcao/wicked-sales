@@ -17,7 +17,7 @@ function Header(props) {
         </div>
       </div>
       <div
-        className="link-pointer float-right"
+        className="link-pointer float-right modal-item-name"
         onClick={() => props.setView('cart')}
       >
         {totalItems}{' '}Items{' '}

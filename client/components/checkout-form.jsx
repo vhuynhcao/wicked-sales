@@ -212,7 +212,7 @@ class CheckoutForm extends React.Component {
             <div className="row">
               <div className="col-md-6 mb-3">
                 <label>
-                  Full name<span className="text-danger">*</span>
+                  Full name <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
@@ -230,7 +230,7 @@ class CheckoutForm extends React.Component {
               </div>
               <div className="col-md-6 mb-3">
                 <label>
-                  Email<span className="text-danger">*</span>
+                  Email <span className="text-danger">*</span>
                 </label>
                 <input
                   type="email"
@@ -251,7 +251,7 @@ class CheckoutForm extends React.Component {
             <div className="row">
               <div className="col-md-6 mb-3">
                 <label>
-                  Address Line 1<span className="text-danger">*</span>
+                  Address Line 1 <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
@@ -284,7 +284,7 @@ class CheckoutForm extends React.Component {
             <div className="row">
               <div className="col-md-4 mb-3">
                 <label>
-                  City<span className="text-danger">*</span>
+                  City <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
@@ -302,7 +302,7 @@ class CheckoutForm extends React.Component {
               </div>
               <div className="col-md-4 mb-3">
                 <label>
-                  Zip Code<span className="text-danger">*</span>
+                  Zip Code <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
@@ -324,7 +324,7 @@ class CheckoutForm extends React.Component {
               </div>
               <div className="col-md-4 mb-3">
                 <label>
-                  State<span className="text-danger">*</span>
+                  State <span className="text-danger">*</span>
                 </label>
                 <select
                   name="state"
@@ -393,7 +393,7 @@ class CheckoutForm extends React.Component {
             <div className="row">
               <div className="col-md-6 mb-3">
                 <label>
-                  Credit card number<span className="text-danger">*</span>
+                  Credit card number <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
@@ -415,7 +415,7 @@ class CheckoutForm extends React.Component {
               </div>
               <div className="col-md-3 mb-3">
                 <label>
-                  Expiration date<span className="text-danger">*</span>
+                  Expiration date <span className="text-danger">*</span>
                 </label>
                 <div className="d-flex">
                   <select
@@ -464,7 +464,7 @@ class CheckoutForm extends React.Component {
               </div>
               <div className="col-md-3 mb-3">
                 <label>
-                  CVV<span className="text-danger">*</span>
+                  CVV <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"

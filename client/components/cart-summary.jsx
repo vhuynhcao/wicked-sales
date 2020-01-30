@@ -30,7 +30,7 @@ function CartSummary(props) {
         <div className="container d-flex justify-content-between mb-5">
           <h4>
             Total:{' '}
-            <span className="text-danger">
+            <span className="text-danger modal-item-name">
               {'$' + (totalPrice / 100).toFixed(2)}
             </span>
           </h4>
