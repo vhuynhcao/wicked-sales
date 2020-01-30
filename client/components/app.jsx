@@ -190,7 +190,7 @@ export default class App extends React.Component {
           cartItemCount={this.state.cart}
           setView={this.setView}
         />
-        <div>{currentView}</div>
+        <div className="fade-in">{currentView}</div>
       </>
     );
   }

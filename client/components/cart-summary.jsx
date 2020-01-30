@@ -46,7 +46,7 @@ function CartSummary(props) {
     );
   }
   return (
-    <div className="container">
+    <div className="container fade-in">
       <div
         className="link-pointer text-muted"
         onClick={() => props.setView('catalog')}
