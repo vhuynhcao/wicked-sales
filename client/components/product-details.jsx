@@ -58,7 +58,7 @@ class ProductDetails extends React.Component {
             </div>
             <div className="container col-md-6">
               <div className="card-body ml-3">
-                <h3 className="card-title">{singleProduct.name}</h3>
+                <h3 className="card-title item-name">{singleProduct.name}</h3>
                 <h4 className="text-muted card-text">
                   {'$' + (singleProduct.price / 100).toFixed(2)}
                 </h4>

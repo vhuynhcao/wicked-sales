@@ -10,7 +10,7 @@
 
 @font-face {
   font-family: WorkSansBold;
-  src: url(WorkSans-ExtraBold.ttf);
+  src: url(WorkSans-SemiBold.ttf);
 }
 
 html {
@@ -62,6 +62,7 @@ body{
 
 .item-name{
   font-family: WorkSansBold;
+  font-size: 1.45rem;
 }
 
 .warning {
