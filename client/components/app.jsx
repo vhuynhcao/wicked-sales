@@ -12,11 +12,11 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'cart',
+        name: 'catalog',
         params: {}
       },
       cart: [],
-      isOpen: false
+      isOpen: true
     };
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
@@ -190,7 +190,7 @@ export default class App extends React.Component {
           cartItemCount={this.state.cart}
           setView={this.setView}
         />
-        <div className="container mt-4">{currentView}</div>
+        <div>{currentView}</div>
       </>
     );
   }

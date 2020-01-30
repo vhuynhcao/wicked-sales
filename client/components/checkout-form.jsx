@@ -184,7 +184,7 @@ class CheckoutForm extends React.Component {
       expYear.length > 0 &&
       cvv.length > 0;
 
-    const activePointer = isEnabled ? 'linkPointer' : null;
+    const activePointer = isEnabled ? 'link-pointer' : null;
 
     const alphabet = ['a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H', 'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T', 'u', 'U', 'v', 'V', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z'];
 
@@ -212,7 +212,7 @@ class CheckoutForm extends React.Component {
             <div className="row">
               <div className="col-md-6 mb-3">
                 <label>
-                  Full name<span className="text-danger">*</span>
+                  Full name <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
@@ -230,7 +230,7 @@ class CheckoutForm extends React.Component {
               </div>
               <div className="col-md-6 mb-3">
                 <label>
-                  Email<span className="text-danger">*</span>
+                  Email <span className="text-danger">*</span>
                 </label>
                 <input
                   type="email"
@@ -251,7 +251,7 @@ class CheckoutForm extends React.Component {
             <div className="row">
               <div className="col-md-6 mb-3">
                 <label>
-                  Address Line 1<span className="text-danger">*</span>
+                  Address Line 1 <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
@@ -284,7 +284,7 @@ class CheckoutForm extends React.Component {
             <div className="row">
               <div className="col-md-4 mb-3">
                 <label>
-                  City<span className="text-danger">*</span>
+                  City <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
@@ -302,7 +302,7 @@ class CheckoutForm extends React.Component {
               </div>
               <div className="col-md-4 mb-3">
                 <label>
-                  Zip Code<span className="text-danger">*</span>
+                  Zip Code <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
@@ -324,7 +324,7 @@ class CheckoutForm extends React.Component {
               </div>
               <div className="col-md-4 mb-3">
                 <label>
-                  State<span className="text-danger">*</span>
+                  State <span className="text-danger">*</span>
                 </label>
                 <select
                   name="state"
@@ -393,7 +393,7 @@ class CheckoutForm extends React.Component {
             <div className="row">
               <div className="col-md-6 mb-3">
                 <label>
-                  Credit card number<span className="text-danger">*</span>
+                  Credit card number <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
@@ -415,7 +415,7 @@ class CheckoutForm extends React.Component {
               </div>
               <div className="col-md-3 mb-3">
                 <label>
-                  Expiration date<span className="text-danger">*</span>
+                  Expiration date <span className="text-danger">*</span>
                 </label>
                 <div className="d-flex">
                   <select
@@ -464,7 +464,7 @@ class CheckoutForm extends React.Component {
               </div>
               <div className="col-md-3 mb-3">
                 <label>
-                  CVV<span className="text-danger">*</span>
+                  CVV <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
@@ -488,7 +488,7 @@ class CheckoutForm extends React.Component {
 
             <div className="container d-flex justify-content-between mt-3 mb-5">
               <div
-                className="linkPointer text-muted"
+                className="link-pointer text-muted"
                 onClick={() => this.props.setView('catalog')}
               >
                 <i className="fas fa-angle-double-left mr-2" />

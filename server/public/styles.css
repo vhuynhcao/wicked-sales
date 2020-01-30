@@ -3,8 +3,27 @@
   src: url(AdreenaScript-Demo.otf);
 }
 
+@font-face{
+  font-family: WorkSans;
+  src: url(WorkSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: WorkSansBold;
+  src: url(WorkSans-SemiBold.ttf);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body{
   overflow-x: hidden;
+  font-family: WorkSans;
+}
+
+* {
+  animation: fadeIn 1s;
 }
 
 .header{
@@ -12,7 +31,7 @@ body{
   z-index: 1;
 }
 
-.modalBox{
+.modal-box{
   position: fixed;
   height: 100%;
   width: 100%;
@@ -23,7 +42,7 @@ body{
   justify-content: center;
 }
 
-.innerModal{
+.inner-modal{
   position: absolute;
   max-width: 350px;
   text-align: center;
@@ -32,13 +51,22 @@ body{
   border-radius: 10px;
 }
 
-.linkPointer {
+.link-pointer {
   cursor: pointer;
 }
 
-.shopName{
+.shop-name{
   font-family: Adreena;
   font-size: 1.5rem;
+}
+
+.item-name{
+  font-family: WorkSansBold;
+  font-size: 1.45rem;
+}
+
+.modal-item-name {
+  font-family: WorkSansBold;
 }
 
 .warning {
@@ -52,4 +80,29 @@ body{
 
 .quantity-number{
   font-size: larger;
+}
+
+.banner-img{
+  background-image: url(images/hero-img.jpg);
+  height: 45vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0% 80%;
+}
+
+@media only screen and (max-width: 600px){
+  .banner-img{
+    height: 25vh;
+  }
+}
+
+@media only screen and (max-height: 1024px) {
+  .banner-img {
+    background-position: 55% 80%;
+  }
+}
+
+@keyframes fadeIn {
+  from{opacity: 0;}
+  to{opacity: 1;}
 }

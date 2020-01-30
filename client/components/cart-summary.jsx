@@ -30,13 +30,13 @@ function CartSummary(props) {
         <div className="container d-flex justify-content-between mb-5">
           <h4>
             Total:{' '}
-            <span className="text-danger">
+            <span className="text-danger modal-item-name">
               {'$' + (totalPrice / 100).toFixed(2)}
             </span>
           </h4>
           <button
             type="button"
-            className="linkPointer btn btn-primary"
+            className="link-pointer btn btn-primary"
             onClick={() => props.setView('checkout')}
           >
             Checkout
@@ -46,16 +46,16 @@ function CartSummary(props) {
     );
   }
   return (
-    <>
+    <div className="container">
       <div
-        className="linkPointer text-muted"
+        className="link-pointer text-muted"
         onClick={() => props.setView('catalog')}
       >
         <i className="fas fa-angle-double-left mr-2"/>Back to Catalog
       </div>
       <h1>My Cart</h1>
       {display}
-    </>
+    </div>
   );
 }
 

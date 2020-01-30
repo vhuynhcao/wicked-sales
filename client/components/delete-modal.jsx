@@ -14,11 +14,11 @@ class DeleteModal extends React.Component {
       changeView = 'catalog';
     }
     return (
-      <div className="modalBox d-flex">
-        <div className="innerModal bg-light">
+      <div className="modal-box d-flex">
+        <div className="inner-modal bg-light">
           <p className="ml-3 mr-3">
             Are you sure you want to remove{' '}
-            <span className="font-weight-bold">
+            <span className="modal-item-name">
               {this.props.productInfo.name}
             </span>{' '}
             from your cart?

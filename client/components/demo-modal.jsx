@@ -2,10 +2,10 @@ import React from 'react';
 
 function DemoModal(props) {
   return (
-    <div className="modalBox d-flex">
-      <div className="innerModal bg-light">
+    <div className="modal-box d-flex">
+      <div className="inner-modal bg-light">
         <h5 className="m-3">
-          Welcome to <span className="shopName">Simply Creative</span>
+          Welcome to <span className="shop-name">Simply Creative</span>
         </h5>
         <p className="ml-3 mr-3">
           Simply Creative is a Full-Stack content management app created for
